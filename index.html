@@ -5,78 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea - El Yelp de la Comuna</title>
     <style>
-        /* CORE DE INGENIERÍA VISUAL NATIVA - CLONACIÓN DE PARÁMETROS CORPORATIVOS YELP */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-        header { background-color: #FFFFFF; border-b: 1px solid #E7E7E7; position: sticky; top: 0; z-index: 50; padding: 12px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+        /* INTERFAZ CORPORATIVA ROBUSTA NATIVA ESTILO YELP */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; padding: 0; }
+        
+        /* CABECERA Y BUSCADOR */
+        header { background-color: #FFFFFF; border-bottom: 1px solid #E7E7E7; padding: 12px 16px; position: sticky; top: 0; z-index: 50; }
         .header-wrap { max-width: 1024px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         @media (min-width: 640px) { .header-wrap { flex-direction: row; justify-content: space-between; } }
-        .brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .brand-icon { background-color: #DA1A29; color: #FFFFFF; width: 36px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 22px; font-style: italic; }
-        .brand-text { font-size: 18px; font-weight: 800; tracking-tight: -0.03em; line-height: 1; }
-        .brand-text span { color: #DA1A29; }
-        .brand-sub { font-size: 9px; color: #6E7072; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 3px; }
-        .search-engine { display: flex; width: 100%; max-width: 460px; border: 1px solid #A3A3A3; border-radius: 6px; overflow: hidden; background-color: #FFFFFF; box-shadow: inset 0 1px 2px rgba(0,0,0,0.08); }
-        .search-engine input { width: 100%; padding: 10px 14px; font-size: 13px; color: #111212; font-weight: 500; border: none; outline: none; }
-        .search-engine button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 18px; font-size: 13px; font-weight: 700; cursor: pointer; }
+        .logo-group { display: flex; align-items: center; gap: 10px; }
+        .logo-badge { background-color: #DA1A29; color: #FFFFFF; width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; }
+        .logo-text { font-size: 18px; font-weight: 800; }
+        .logo-text span { color: #DA1A29; }
+        .search-container { display: flex; width: 100%; max-width: 450px; border: 1px solid #A3A3A3; border-radius: 6px; overflow: hidden; }
+        .search-container input { width: 100%; padding: 10px; font-size: 13px; border: none; outline: none; background: #FFFFFF; }
+        .search-container button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 16px; font-weight: bold; cursor: pointer; }
         
-        .nav-scroller { background-color: #FFFFFF; border-b: 1px solid #E7E7E7; position: sticky; top: 62px; z-index: 40; overflow-x: auto; display: flex; padding: 0 16px; gap: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
-        .nav-scroller::-webkit-scrollbar { display: none; }
-        .tab-btn { background: none; border: none; padding: 14px 0; font-size: 13px; font-weight: 600; color: #6E7072; white-space: nowrap; cursor: pointer; border-bottom: 3px solid transparent; font-family: inherit; }
-        .tab-btn.active { border-color: #DA1A29; color: #DA1A29; font-weight: 700; }
+        /* NAVEGACIÓN POR PESTAÑAS (SPA) */
+        .tabs-bar { background-color: #FFFFFF; border-bottom: 1px solid #E7E7E7; display: flex; padding: 0 16px; gap: 20px; overflow-x: auto; position: sticky; top: 62px; z-index: 40; }
+        .tab-link { background: none; border: none; padding: 14px 0; font-size: 13px; font-weight: 600; color: #6E7072; cursor: pointer; border-bottom: 3px solid transparent; }
+        .tab-link.active { border-color: #DA1A29; color: #DA1A29; font-weight: 700; }
         
-        .container { max-width: 1024px; margin: 0 auto; padding: 16px; display: grid; grid-template-columns: 1fr; gap: 20px; }
-        @media (min-width: 1024px) { .container { grid-template-columns: 2fr 1fr; } }
-        .control-panel { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 8px; padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
-        .filters { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; font-weight: 700; color: #4A4A4A; }
-        .filter-item { display: flex; align-items: center; gap: 6px; }
-        .filters select { background-color: #F8F8F8; border: 1px solid #CCCCCC; border-radius: 4px; padding: 4px 8px; font-weight: 700; color: #4A4A4A; outline: none; cursor: pointer; }
-        .filters input[type="checkbox"] { width: 16px; height: 16px; accent-color: #DA1A29; cursor: pointer; }
-        .counter-label { font-weight: 800; color: #9B9B9B; text-transform: uppercase; font-size: 11px; letter-spacing: 0.03em; }
+        /* CONTENEDOR PRINCIPAL PANTALLA DIVIDIDA */
+        .main-layout { max-width: 1024px; margin: 0 auto; padding: 16px; display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 1024px) { .main-layout { grid-template-columns: 2fr 1fr; } }
         
-        .emergency-row { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 12px; padding: 16px; margin-top: 16px; box-shadow: 0 4px 12px rgba(218,26,41,0.06); display: flex; flex-direction: column; justify-content: space-between; gap: 14px; animation: fadeIn 0.25s ease-out; }
-        @media (min-width: 576px) { .emergency-row { flex-direction: row; align-items: center; } }
-        .badge-alert { background-color: #DA1A29; color: #FFFFFF; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.04em; display: inline-block; }
-        .emerg-name { font-size: 17px; font-weight: 800; color: #111212; margin: 4px 0 2px 0; tracking-tight: -0.01em; }
-        .emerg-sub { font-size: 12px; color: #DA1A29; font-weight: 700; margin: 0; }
-        .emerg-loc { font-size: 12px; color: #6E7072; font-weight: 500; margin: 4px 0 0 0; }
-        .btn-call-now { display: block; text-align: center; background-color: #DA1A29; color: #FFFFFF; font-size: 12px; font-weight: 800; padding: 10px 16px; border-radius: 6px; text-decoration: none; box-shadow: 0 2px 4px rgba(218,26,41,0.15); font-family: inherit; }
+        /* CONTROLES Y FILTROS */
+        .filter-row { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 8px; padding: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: #4A4A4A; }
+        .filter-select { background-color: #F8F8F8; border: 1px solid #CCCCCC; border-radius: 4px; padding: 4px; font-weight: bold; cursor: pointer; }
         
-        .premium-row { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 18px; margin-top: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); position: relative; display: flex; flex-direction: column; gap: 16px; animation: fadeIn 0.25s ease-out; }
-        @media (min-width: 576px) { .premium-row { flex-direction: row; } }
-        .badge-premium { position: absolute; top: 0; right: 0; background-color: #F15C22; color: #FFFFFF; font-size: 9px; font-weight: 800; padding: 4px 10px; border-radius: 0 11px 0 8px; letter-spacing: 0.04em; text-transform: uppercase; }
-        .prem-thumb { width: 100%; height: 96px; background: linear-gradient(135deg, #F9F9F9 0%, #EAEAEA 100%); border: 1px solid #E7E7E7; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #8A8A8A; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; shrink: 0; }
-        @media (min-width: 576px) { .prem-thumb { width: 110px; } }
-        .prem-body { flex: 1; }
-        .prem-subcat { font-size: 10px; color: #6E7072; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; }
-        .prem-name { font-size: 18px; font-weight: 700; color: #111212; margin: 2px 0 0 0; line-height: 1.2; tracking-tight: -0.01em; cursor: pointer; }
-        .prem-name:hover { color: #0073BB; text-decoration: underline; }
-        .prem-meta { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; }
-        .prem-stars { color: #F15C22; font-weight: 800; font-size: 13px; }
-        .prem-rating { font-weight: 800; color: #111212; }
-        .prem-opiniones { color: #0073BB; font-weight: 600; cursor: pointer; text-decoration: underline; }
-        .prem-price { color: #111212; font-weight: 700; }
-        .prem-status { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase; }
-        .open { background-color: #F2F9F3; color: #107A32; }
-        .closed { background-color: #FFF2F3; color: #C9212D; }
-        .prem-loc { font-size: 12px; color: #6E7072; font-weight: 500; margin: 6px 0 0 0; }
-        .prem-review-container { margin-top: 10px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 10px; border-radius: 6px; font-size: 12px; color: #4A4A4A; line-height: 1.4; cursor: pointer; }
-        .prem-review-container strong { color: #9B9B9B; font-weight: 700; display: block; margin-bottom: 2px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.03em; }
-        .prem-review-container:hover { background-color: #F0F0F0; }
-        .prem-actions { margin-top: 14px; padding-top: 10px; border-top: 1px solid #E7E7E7; display: flex; justify-content: space-between; align-items: center; }
-        .prem-whatsapp-tag { font-size: 11px; font-weight: 700; color: #107A32; }
-        .prem-buttons { display: flex; gap: 6px; }
-        .btn-prem-action { background-color: #DA1A29; color: #FFFFFF; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 4px; text-decoration: none; box-shadow: 0 1px 2px rgba(218,26,41,0.1); font-family: inherit; }
-        .btn-prem-map { background-color: #FFFFFF; border: 1px solid #CCCCCC; color: #4A4A4A; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-family: inherit; }
+        /* SECCIONES ASÍNCRONAS (SPA VISTAS) */
+        .view-panel { display: none; }
+        .view-panel.active-view { display: block; }
         
-        .basic-row { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 8px; padding: 14px 16px; margin-top: 8px; opacity: 0.75; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; animation: fadeIn 0.25s ease-out; }
-        .basic-sub { font-size: 9px; color: #9B9B9B; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
-        .basic-title { font-size: 14px; font-weight: 700; color: #4A4A4A; margin: 2px 0 0 0; tracking-tight: -0.01em; }
-        .basic-loc { font-size: 11px; color: #6E7072; font-weight: 500; margin: 4px 0 0 0; }
-        .basic-badge { font-size: 8px; font-weight: 800; color: #9B9B9B; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 2px 6px; border-radius: 3px; text-transform: uppercase; shrink: 0; }
+        /* JERARQUÍA OPERATIVA DE TARJETAS */
+        .item-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 12px; padding: 16px; margin-top: 14px; box-shadow: 0 4px 10px rgba(218,26,41,0.05); }
+        .item-premium { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; margin-top: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); position: relative; }
+        .badge-premium { position: absolute; top: 0; right: 0; background-color: #F15C22; color: #FFFFFF; font-size: 9px; font-weight: bold; padding: 3px 8px; border-radius: 0 11px 0 8px; }
+        .stars { color: #F15C22; font-weight: bold; }
+        .link-reviews { color: #0073BB; cursor: pointer; text-decoration: underline; font-size: 12px; }
+        .review-snippet { margin-top: 10px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 10px; border-radius: 6px; font-size: 12px; color: #4A4A4A; }
+        .btn-action { display: inline-block; background-color: #DA1A29; color: #FFFFFF; text-decoration: none; padding: 8px 14px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-top: 10px; }
+        .btn-map { background-color: #FFFFFF; border: 1px solid #CCCCCC; padding: 7px 14px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-left: 4px; }
+        .item-basic { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 8px; padding: 12px; margin-top: 8px; opacity: 0.8; display: flex; justify-content: space-between; }
         
-        .side-panel { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; overflow: hidden; position: sticky; top: 180px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .side-head { padding: 12px 16px; border-bottom: 1px solid #E7E7E7; background-color: #F8F8F8; }
-        .side-title { font-size: 13px; font-weight: 800; color: #111212; margin: 0; text-transform: uppercase; letter-spacing: 0.02em; }
-        .side-sub { font-size: 10px; color: #6E7072; font-weight: 700; margin: 2px 0 0 0; }
-        .side-map-box { height: 200px; position: relative; background-color: #E5E7EB; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 16px; }
-        .side-map-text { font-size: 11px; font-weight: 700; color: #6E7072; line-height: 1.4; margin: 0; }
+        /* PANEL LATERAL Y SUBMENÚS DETALLADOS */
+        .sidebar { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); height: fit-content; }
+        .map-placeholder { height: 180px; background-color: #E5E7EB; border-radius: 6px; margin-top: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; font-size: 12px; color: #6E7072; font-weight: bold; }
+        .btn-add-local { width: 100%; background-color: #111212; color: #FFFFFF; border: none; padding: 10px; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+        
+        /* FORMULARIO CASILLAS INTERNAS */
+        .form-box { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 20px; }
+        .field-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+        .field-group label { font-size: 12px; font-weight: bold; color: #4A4A4A; }
+        .field-group input, .field-group select { padding: 8px; border: 1px solid #CCCCCC; border-radius: 4px; font-size: 13px; }
+        .btn-submit { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 10px; border-radius: 4px; font-weight: bold; width: 100%; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-wrap">
+            <div class="logo-group" onclick="showView('home')">
+                <div class="logo-badge">Q!</div>
+                <div class="logo-text">Quillón<span>enLínea</span></div>
+            </div>
+            <div class="search-container">
+                <input id="search-input" oninput="triggerSearch(this.value)" type="text" placeholder="Buscar vulcanizaciones, cabañas, viñas...">
+                <button onclick="showView('home')">Buscar</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="tabs-bar">
+        <button id="btn-all" onclick="filterSectores('todos', this)" class="tab-link active">📦 Todo el Pueblo</button>
+        <button onclick="filterSectores('gastronomia', this)" class="tab-link">🍔 Gastronomía</button>
+        <button onclick="filterSectores('servicios', this)" class="tab-link">🛠️ Servicios y Turnos</button>
+        <button onclick="filterSectores('turismo', this)" class="tab-link">🍷 Turismo y Vino</button>
+    </div>
+
+    <div class="main-layout">
+        
+        <!-- COLUMNA CENTRAL: VISTAS ASÍNCRONAS SPA -->
+        <div class="content-area">
+            
+            <!-- VISTA 1: HOME LISTADOS -->
+            <div id="view-home" class="view-panel active-view">
+                <div class="filter-row">
+                    <div>
+                        <span>Filtrar: </span>
+                        <select id="price-select" onchange="triggerPrice(this)" class="filter-select">
+                            <option value="todos">Todos los costos</option>
+                            <option value="1">$</option>
+                            <option value="2">$$</option>
+                            <option value="3">$$$</option>
+                        </select>
+                    </div>
+                    <span id="counter" style="color: #9B9B9B; font-size: 11px;">Cargando locales...</span>
+                </div>
+                <div id="directory-target"></div>
+            </div>
+
+            <!-- VISTA 2: SUBMENÚ FEED DE RESEÑAS DETALLADAS -->
+            <div id="view-reviews" class="view-panel">
+                <div class="form-box" style="margin-bottom: 14px;">
+                    <button onclick="showView('home')" style="color:#0073BB; font-weight:bold; background:none; border:none; cursor:pointer; padding:0; margin-bottom:10px;">← Volver</button>
+                    <h2 id="rev-title" style="margin:0; font-size:18px;"></h2>
+                    <p id="rev-stars" class="stars" style="margin:5px 0 0 0;"></p>
+                </div>
+                <div class="form-box">
+                    <h3 style="margin:0 0 10px 0; font-size:13px; color:#9B9B9B; text-transform:uppercase;">Historial de Reseñas de Clientes</h3>
+                    <div id="rev-feed"></div>
+                </div>
+            </div>
+
+            <!-- VISTA 3: CASILLAS DE REGISTRO E INSCRIPCIÓN -->
+            <div id="view-register" class="view-panel">
+                <div class="form-box">
+                    <button onclick="showView('home')" style="color:#0073BB; font-weight:bold; background:none; border:none; cursor:pointer; padding:0; margin-bottom:10px;">← Cancelar</button>
+                    <h2 style="margin:0 0 15px 0; font-size:18px; color:#DA1A29;">Inscribe tu Comercio Local</h2>
+                    <form onsubmit="registerNewBiz(event)">
+                        <div class="field-group"><label>Nombre Comercial</label><input type="text" id="f-name" required placeholder="Ej. Parrillada Don Juan"></div>
+                        <div class="field-group">
+                            <label>Giro o Sector</label>
+                            <select id="f-cat">
+                                <option value="gastronomia">Gastronomía</option>
+                                <option value="servicios">Servicios y Turnos</option>
+                                <option value="turismo">Turismo y Vino</option>
+                            </select>
+                        </div>
