@@ -4,117 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea - El Yelp de la Comuna</title>
-    <!-- Inyección del motor de diseño oficial estable -->
-    <script src="https://tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; }
-        .badge-open { background-color: #F2F9F3; color: #107A32; }
-        .badge-closed { background-color: #FFF2F3; color: #C9212D; }
-        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        /* MOTOR DE DISEÑO NATIVO COMPLETO - ALTA DENSIDAD CORPORATIVA ESTILO YELP */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+        header { background-color: #FFFFFF; border-b: 1px solid #E7E7E7; position: sticky; top: 0; z-index: 50; padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 12px; }
+        @media (min-width: 640px) { .header-container { flex-direction: row; } }
+        .logo-block { display: flex; align-items: center; gap: 10px; select-none: none; }
+        .logo-box { background-color: #DA1A29; color: #FFFFFF; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; box-shadow: 0 2px 4px rgba(218,26,41,0.2); }
+        .logo-text { font-size: 18px; font-weight: 800; tracking-tight: -0.025em; line-height: 1; }
+        .logo-text span { color: #DA1A29; }
+        .logo-sub { font-size: 9px; color: #6E7072; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+        .search-bar { display: flex; width: 100%; max-width: 480px; border: 1px solid #CCCCCC; border-radius: 8px; overflow: hidden; background-color: #FFFFFF; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); }
+        .search-bar input { width: 100%; padding: 10px 12px; font-size: 13px; color: #111212; font-weight: 500; border: none; background: #FFFFFF; outline: none; }
+        .search-bar button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 20px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+        .search-bar button:hover { background-color: #B2121E; }
+        
+        .nav-tabs { background-color: #FFFFFF; border-b: 1px solid #E7E7E7; padding: 0 16px; position: sticky; top: 62px; z-index: 40; overflow-x: auto; display: flex; gap: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+        .nav-tabs::-webkit-scrollbar { display: none; }
+        .tab-btn { background: none; border: none; padding: 14px 0; font-size: 13px; font-weight: 600; color: #6E7072; whitespace: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+        .tab-btn.active { border-color: #DA1A29; color: #DA1A29; font-weight: 700; }
+        
+        main { max-width: 800px; margin: 0 auto; padding: 16px; }
+        .filter-panel { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 14px; margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03); font-size: 13px; font-weight: 700; color: #4A4A4A; }
+        .filter-group { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .filter-item { display: flex; align-items: center; gap: 6px; }
+        .filter-panel select { background-color: #F8F8F8; border: 1px solid #E7E7E7; border-radius: 6px; padding: 4px 8px; font-weight: 700; color: #4A4A4A; outline: none; cursor: pointer; }
+        .filter-panel input[type="checkbox"] { w: 16px; h: 16px; accent-color: #DA1A29; cursor: pointer; }
+        .global-counter { font-weight: 800; color: #9B9B9B; text-transform: uppercase; font-size: 11px; letter-spacing: 0.02em; }
+        
+        /* JERARQUÍAS DE TARJETAS DE MONETIZACIÓN */
+        .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(218,26,41,0.08); display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 16px; animation: fadeIn 0.3s ease-in-out; }
+        @media (min-width: 576px) { .card-emergency { flex-direction: row; align-items: center; } }
+        .emergency-badge { background-color: #DA1A29; color: #FFFFFF; font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; }
+        .emergency-title { font-size: 18px; font-weight: 900; color: #111212; margin: 4px 0 2px 0; }
+        .emergency-subcat { font-size: 13px; color: #DA1A29; font-weight: 700; margin: 0; }
+        .emergency-address { font-size: 12px; color: #6E7072; font-weight: 500; margin: 4px 0 0 0; }
+        .btn-emergency-call { width: 100%; text-align: center; background-color: #DA1A29; color: #FFFFFF; font-size: 12px; font-weight: 900; padding: 12px 16px; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 4px rgba(218,26,41,0.2); transition: background 0.2s; }
+        @media (min-width: 576px) { .btn-emergency-call { width: auto; } }
+        .btn-emergency-call:hover { background-color: #B2121E; }
+
+        .card-premium { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); position: relative; animation: fadeIn 0.3s ease-in-out; }
+        .premium-badge { position: absolute; top: 0; right: 0; background-color: #F15C22; color: #FFFFFF; font-size: 9px; font-weight: 900; padding: 4px 10px; border-radius: 0 14px 0 10px; letter-spacing: 0.05em; }
+        .premium-layout { display: flex; flex-direction: column; gap: 16px; }
+        @media (min-width: 576px) { .premium-layout { flex-direction: row; } }
+        .premium-thumb { width: 100%; height: 96px; background: linear-gradient(135deg, #F8F8F8 0%, #E7E7E7 100%); border: 1px solid #E7E7E7; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #9B9B9B; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+        @media (min-width: 576px) { .premium-thumb { width: 128px; } }
+        .premium-content { flex: 1; }
+        .premium-subcat { font-size: 10px; color: #6E7072; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; block: block; }
+        .premium-title { font-size: 18px; font-weight: 700; color: #111212; margin: 2px 0 0 0; line-height: 1.2; }
+        .premium-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12px; }
+        .premium-stars { color: #F15C22; font-weight: 700; letter-spacing: -1px; }
+        .premium-rating-num { font-weight: 900; color: #111212; }
+        .premium-opiniones { color: #6E7072; font-weight: 500; }
+        .premium-price { color: #111212; font-weight: 700; }
+        .premium-status { font-size: 10px; font-weight: 700; padding: 2px 6px; rounded: 4px; }
+        .status-open { background-color: #F2F9F3; color: #107A32; }
+        .status-closed { background-color: #FFF2F3; color: #C9212D; }
+        .premium-address { font-size: 12px; color: #6E7072; font-weight: 500; margin: 6px 0 0 0; }
+        .premium-review-box { margin-top: 10px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 10px; border-radius: 8px; font-size: 12px; color: #4A4A4A; font-weight: 500; }
+        .premium-review-box strong { color: #111212; font-weight: 700; display: block; margin-bottom: 2px; font-size: 9px; text-transform: uppercase; color: #9B9B9B; letter-spacing: 0.02em; }
+        .premium-actions { margin-top: 16px; padding-top: 10px; border-top: 1px solid #E7E7E7; display: flex; justify-content: space-between; align-items: center; }
+        .premium-whatsapp-tag { font-size: 11px; font-weight: 700; color: #107A32; }
+        .premium-buttons { display: flex; gap: 6px; }
+        .btn-premium-contact { background-color: #DA1A29; color: #FFFFFF; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-decoration: none; box-shadow: 0 1px 2px rgba(218,26,41,0.15); }
+        .btn-premium-contact:hover { background-color: #B2121E; }
+        .btn-premium-map { background-color: #FFFFFF; border: 1px solid #E7E7E7; color: #4A4A4A; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+        .btn-premium-map:hover { background-color: #F8F8F8; }
+
+        .card-basic { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; margin-bottom: 8px; opacity: 0.8; box-shadow: 0 1px 2px rgba(0,0,0,0.01); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; animation: fadeIn 0.3s ease-in-out; }
+        .basic-subcat { font-size: 9px; color: #9B9B9B; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
+        .basic-title { font-size: 14px; font-weight: 700; color: #4A4A4A; margin: 2px 0 0 0; }
+        .basic-address { font-size: 11px; color: #6E7072; font-weight: 500; margin: 4px 0 0 0; }
+        .basic-badge { font-size: 8px; font-weight: 800; color: #9B9B9B; background-color: #F5F5F5; border: 1px solid #E7E7E7; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; shrink: 0; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-[#F5F5F5] min-h-screen text-[#111212]">
+<body>
 
-    <!-- INTERFAZ VISUAL DE ALTA DENSIDAD CORPORATIVA (DOM) -->
-    <header class="bg-white border-b border-[#E7E7E7] sticky top-0 z-50 px-4 py-3.5 shadow-sm">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2.5 shrink-0 select-none">
-                <div class="bg-[#DA1A29] text-white w-9 h-9 rounded-lg flex items-center justify-center font-black text-xl tracking-tighter shadow-sm">Q!</div>
-                <div class="flex flex-col">
-                    <span class="text-xl font-extrabold tracking-tight text-[#111212] leading-none">Quillón<span class="text-[#DA1A29]">enLínea</span></span>
-                    <span class="text-[9px] text-gray-400 font-extrabold tracking-wider uppercase mt-1">El Google de la Comuna</span>
+    <!-- INTERFAZ VISUAL DEL MENÚ -->
+    <header>
+        <div class="header-container">
+            <div class="logo-block">
+                <div class="logo-box">Q!</div>
+                <div>
+                    <div class="logo-text">Quillón<span>enLínea</span></div>
+                    <div class="logo-sub">El Google de la Comuna</div>
                 </div>
             </div>
-            <div class="flex w-full sm:max-w-md border border-gray-300 rounded-lg overflow-hidden bg-white shadow-inner focus-within:border-gray-400 transition-colors">
-                <input id="search-field" oninput="handleSearchInput(this.value)" type="text" placeholder="🔎 Buscar vulcanizaciones, cabañas, servicios..." class="w-full px-3 py-2 text-xs bg-white text-[#111212] font-medium focus:outline-none">
-            </div>
-        </div>
-    </header>
-
-    <div class="bg-white border-b border-[#E7E7E7] px-4 shadow-sm overflow-x-auto sticky top-[65px] z-40">
-        <div class="max-w-6xl mx-auto flex gap-5 text-xs font-semibold">
-            <button onclick="setPrimaryCategory('todos', this)" class="tab-btn py-3 border-b-2 border-[#DA1A29] text-[#DA1A29] font-bold whitespace-nowrap focus:outline-none cursor-pointer">📦 Todo el Pueblo</button>
-            <button onclick="setPrimaryCategory('gastronomia', this)" class="tab-btn py-3 border-b-2 border-transparent text-gray-500 whitespace-nowrap focus:outline-none cursor-pointer">🍔 Gastronomía</button>
-            <button onclick="setPrimaryCategory('servicios', this)" class="tab-btn py-3 border-b-2 border-transparent text-gray-500 whitespace-nowrap focus:outline-none cursor-pointer">🛠️ Servicios y Turnos</button>
-            <button onclick="setPrimaryCategory('turismo', this)" class="tab-btn py-3 border-b-2 border-transparent text-gray-500 whitespace-nowrap focus:outline-none cursor-pointer">🍷 Turismo y Vino</button>
-        </div>
-    </div>
-
-    <main class="max-w-3xl mx-auto px-4 py-4">
-        <div class="bg-white border border-[#E7E7E7] rounded-xl p-3.5 mb-4 flex flex-wrap items-center justify-between gap-3 shadow-sm text-xs font-bold text-gray-700">
-            <div class="flex items-center gap-4 flex-wrap">
-                <div class="flex items-center gap-1.5">
-                    <label class="text-gray-400 font-semibold">Costo:</label>
-                    <select id="filter-price" onchange="setPriceFilter(this)" class="bg-gray-50 border border-[#E7E7E7] rounded-md px-2 py-0.5 font-bold text-gray-700 focus:outline-none cursor-pointer">
-                        <option value="todos">Todos</option>
-                        <option value="1">$</option>
-                        <option value="2">$$</option>
-                        <option value="3">$$$</option>
-                    </select>
-                </div>
-                <div class="flex items-center gap-1.5">
-                    <input type="checkbox" id="filter-open" onchange="toggleOpenState(this)" class="w-4 h-4 rounded accent-[#DA1A29] cursor-pointer">
-                    <label for="filter-open" class="text-gray-400 font-semibold cursor-pointer select-none">Abierto Ahora</label>
-                </div>
-            </div>
-            <span id="global-counter" class="font-extrabold text-gray-400 tracking-tight">Analizando listados...</span>
-        </div>
-
-        <!-- Contenedor donde se inyecta la base de datos de locales -->
-        <div id="main-directory-render" class="min-h-[400px]"></div>
-    </main>
-
-    <!-- ENGINE LOGÍSTICO Y BASE DE DATOS PROTEGIDA (AL FINAL DE LA PÁGINA) -->
-    <script>
-        const database = [
-            { id: 1, nombre: "Complejo Turístico Laguna Esmeralda Artificial", categoria: "turismo", subcat: "Cabañas con Guardia y Cámaras", rating: "⭐⭐⭐⭐⭐", opinionesCount: 142, precio: 3, direccion: "Av. Circunvalación #1820, sector Laguna", telefono: "+56911112222", abierto: true, premium: true, emergencia: false, tags: ["Piscina", "Seguridad 24/7", "Cámaras"], infoAdicional: "Cabañas Equipadas: $55.000 CLP / Noche", reviewTexto: "Excelente seguridad y las cámaras dan total tranquilidad." },
-            { id: 2, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", categoria: "gastronomia", subcat: "Parrilladas y Comida Rápida", rating: "⭐⭐⭐⭐", opinionesCount: 89, precio: 2, direccion: "Bernardo O'Higgins #720, Quillón Urbano", telefono: "+56933334444", abierto: true, premium: true, emergencia: false, tags: ["Delivery", "Terraza", "Vinos"], infoAdicional: "Parrillada Premium: $28.000 CLP", reviewTexto: "El reparto a las cabañas llegó caliente." },
-            { id: 2, nombre: "Vulcanización y Asistencia Central 24/7 Artificial", categoria: "servicios", subcat: "Vulcanizaciones 24/7", rating: "⭐⭐⭐⭐⭐", opinionesCount: 64, precio: 2, direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)", telefono: "+56955556666", abierto: true, premium: true, emergencia: true, tags: ["Atención Domingo", "Servicio en Ruta"], infoAdicional: "Atención Inmediata 24 Horas", reviewTexto: "Me salvaron un domingo en la madrugada." },
-            { id: 4, nombre: "Viña Ancestral Los Valles Ocultos Artificial", categoria: "turismo", subcat: "Viñas abiertas hoy", rating: "⭐⭐⭐⭐", opinionesCount: 37, precio: 3, direccion: "Camino Cerro Negro, Km 4.5", telefono: "+56977778888", abierto: false, premium: true, emergencia: false, tags: ["Catas Guiadas", "Turismo Invierno"], infoAdicional: "Tour con Enólogo: $15.000 CLP", reviewTexto: "Muy buena la cata de vinos." },
-            { id: 5, nombre: "Panadería y Pastelería Delicias del Pueblo Artificial", categoria: "gastronomia", subcat: "Pastelerías", rating: "⭐⭐⭐⭐", opinionesCount: 4, precio: 1, direccion: "Vicente Méndez #140", telefono: "", abierto: true, premium: false, emergencia: false, tags: ["Local Físico"], infoAdicional: "", reviewTexto: "Buen pan tradicional de la zona." }
-        ];
-
-        let appState = { cat: 'todos', search: '', precio: 'todos', abiertoOnly: false };
-
-        function filterAndRender() {
-            const container = document.getElementById('main-directory-render');
-            if(!container) return;
-            container.innerHTML = '';
-
-            const filtered = database.filter(item => {
-                const mCat = appState.cat === 'todos' || item.categoria === appState.cat;
-                const mSearch = item.nombre.toLowerCase().includes(appState.search.toLowerCase()) || 
-                                item.tags.some(t => t.toLowerCase().includes(appState.search.toLowerCase())) || 
-                                item.subcat.toLowerCase().includes(appState.search.toLowerCase());
-                const mPrice = appState.precio === 'todos' || item.precio === parseInt(appState.precio);
-                const mOpen = !appState.abiertoOnly || item.abierto;
-                return mCat && mSearch && mPrice && mOpen;
-            });
-
-            filtered.sort((a, b) => (b.emergencia - a.emergencia) || (b.premium - a.premium));
-
-            const counterEl = document.getElementById('global-counter');
-            if(counterEl) counterEl.innerText = `${filtered.length} locales listados`;
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center py-16 bg-white border border-[#E7E7E7] rounded-xl fade-in"><p class="text-[#6E7072] font-bold">Sin resultados en Quillón.</p></div>`;
-                return;
-            }
-
-            filtered.forEach(item => {
-                const priceIndicator = "$".repeat(item.precio);
-                let html = '';
-                if (item.emergencia) {
-                    html = `
-                        <div class="bg-red-50 border-2 border-[#DA1A29] rounded-xl p-5 mb-4 flex flex-col sm:flex-row justify-between items-center gap-4 fade-in">
-                            <div>
-                                <span class="bg-[#DA1A29] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-sm">⚠️ TURNO 24/7</span>
-                                <h3 class="text-base font-black text-[#111212] mt-0.5 tracking-tight">${item.nombre}</h3>
-                                <p class="text-xs text-red-700 font-bold">${item.subcat}</p>
-                                <p class="text-xs text-gray-500 font-medium">📍 ${item.direccion}</p>
-                            </div>
-                            <a href="tel:${item.telefono}" class="w-full sm:w-auto bg-[#DA1A29] text-white text-xs font-black px-4 py-3 rounded-lg text-center shadow-sm block tracking-wide shrink-0">📞 LLAMAR POR EMERGENCIA</a>
-                        </div>`;
-                } else if (item.premium) {
-                    html = `
+            <div class="search-bar">
+                <input id="search-field" oninput="handleSearchInput(this.value)" type="text" placeholder="Buscar vulcanizaciones, cabañas, servicios...">
