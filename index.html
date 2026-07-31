@@ -5,68 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea</title>
     <style>
-        /* CORE DE INGENIERÍA VISUAL - ALTA VITALIDAD CORPORATIVA */
+        /* CORE DE INGENIERÍA VISUAL - ALTA DENSIDAD FOTOGRÁFICA */
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #F8FAFC; color: #0F172A; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
-        /* CABECERA VIBRANTE CON EFECTO DE FONDO */
-        header { background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%); border-bottom: 1px solid #F1F5F9; padding: 20px 16px; text-align: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+        /* CABECERA VIBRANTE CON EFECTO DE FONDO SUAVE */
+        header { background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%); border-bottom: 1px solid #E2E8F0; padding: 20px 16px; text-align: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
         .logo-text { font-size: 26px; font-weight: 800; tracking-tight: -0.03em; margin: 0; color: #0F172A; }
-        .logo-text span { color: #DA1A29; position: relative; }
+        .logo-text span { color: #DA1A29; }
         .logo-sub { font-size: 10px; color: #64748B; font-weight: 800; text-transform: uppercase; margin: 4px 0 16px 0; letter-spacing: 0.08em; }
         
-        /* BARRA DE BÚSQUEDA INTERACTIVA MEJORADA */
-        .search-wrapper { max-width: 500px; margin: 0 auto; display: flex; border: 2px solid #E2E8F0; border-radius: 10px; overflow: hidden; background-color: #FFFFFF; box-shadow: 0 4px 12px rgba(15,23,42,0.04); transition: all 0.25s; }
-        .search-wrapper:focus-within { border-color: #DA1A29; box-shadow: 0 4px 20px rgba(218,26,41,0.1); }
+        /* BARRA DE BÚSQUEDA INTERACTIVA BLINDADA */
+        .search-wrapper { max-width: 500px; margin: 0 auto; display: flex; border: 2px solid #E2E8F0; border-radius: 10px; overflow: hidden; background-color: #FFFFFF; box-shadow: 0 4px 12px rgba(15,23,42,0.04); }
         .search-wrapper input { width: 100%; padding: 14px; font-size: 14px; border: none; outline: none; background: #FFFFFF; color: #0F172A; font-weight: 500; }
-        .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 24px; font-weight: 800; font-size: 14px; cursor: pointer; transition: background 0.2s; }
-        .search-wrapper button:hover { background-color: #B2121E; }
+        .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 24px; font-weight: 800; font-size: 14px; cursor: pointer; }
         
-        /* CUADRÍCULA DE NAVEGACIÓN COMPACTA CON ANIMACIÓN Y VIDA */
-        .categories-grid { max-width: 500px; margin: 20px auto; display: grid; grid-template-columns: repeat(4, 1fr); background-color: #FFFFFF; box-shadow: 0 10px 25px rgba(15,23,42,0.06); border-radius: 14px; overflow: hidden; border: 1px solid #E2E8F0; }
-        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; border-right: 1px solid #F1F5F9; border-bottom: 1px solid #F1F5F9; padding: 18px 2px; cursor: pointer; text-decoration: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-family: inherit; }
-        .cat-grid-item:active { transform: scale(0.95); background-color: #F8FAFC; }
+        /* CUADRÍCULA DE CATEGORÍAS COMPLETA DE 8 CASILLAS CON IMÁGENES REALES DE FONDO */
+        .categories-grid { max-width: 500px; margin: 24px auto; display: grid; grid-template-columns: repeat(4, 1fr); background-color: #FFFFFF; box-shadow: 0 12px 30px rgba(15,23,42,0.08); border-radius: 14px; overflow: hidden; border: 1px solid #E2E8F0; }
+        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 34px 2px 12px 2px; cursor: pointer; text-decoration: none; position: relative; overflow: hidden; font-family: inherit; transition: transform 0.2s, box-shadow 0.2s; background-size: cover; background-position: center; background-repeat: no-repeat; height: 50px; }
+        .cat-grid-item:active { transform: scale(0.96); }
         
-        /* COLORES IDENTITARIOS ASIGNADOS A CADA ICONO SVG */
-        .cat-icon-wrap { width: 28px; height: 26px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-        .cat-grid-item:hover .cat-icon-wrap { transform: translateY(-2px); }
+        /* CAPA DE OSCURECIMIENTO INTERNO PARA DESTACAR EL TEXTO (EFECTO CINE) */
+        .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.4) 60%, rgba(15,23,42,0.2) 100%); z-index: 1; transition: background 0.2s; }
+        .cat-grid-item:hover .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.95) 0%, rgba(15,23,42,0.5) 100%); }
         
-        /* Paleta cromática por sector */
-        .color-todo { fill: #6366F1; color: #6366F1; }
-        .color-rest { fill: #EA580C; color: #EA580C; }
-        .color-cab { fill: #0EA5E9; color: #0EA5E9; }
-        .color-vin { fill: #8B5CF6; color: #8B5CF6; }
-        .color-del { fill: #10B981; color: #10B981; }
-        .color-serv { fill: #EF4444; color: #EF4444; }
-        .color-tur { fill: #F59E0B; color: #F59E0B; }
-        .color-mas { fill: #64748B; color: #64748B; }
+        /* ASIGNACIÓN DE IMÁGENES FOTOGRÁFICAS REALISTAS COMPACTAS (BORDES LIMPIOS) */
+        .img-todo { background-image: url('https://unsplash.com'); }
+        .img-rest { background-image: url('https://unsplash.com'); }
+        .img-cab { background-image: url('https://unsplash.com'); }
+        .img-vin { background-image: url('https://unsplash.com'); }
+        .img-del { background-image: url('https://unsplash.com'); }
+        .img-serv { background-image: url('https://unsplash.com'); }
+        .img-tur { background-image: url('https://unsplash.com'); }
+        .img-mas { background-image: url('https://unsplash.com'); }
         
-        /* Estado seleccionado dinámico estilo Yelp */
-        .cat-grid-item.active-item { background: linear-gradient(to bottom, #FFF2F3, #FFFFFF); }
-        .cat-grid-item.active-item .cat-icon-wrap { fill: #DA1A29 !important; color: #DA1A29 !important; transform: scale(1.1); }
-        .cat-label-text { font-size: 11px; font-weight: 700; color: #475569; text-align: center; line-height: 1.2; }
-        .cat-grid-item.active-item .cat-label-text { color: #DA1A29; font-weight: 800; }
+        /* ESTADO DE SELECCIÓN ACTIVA CROMÁTICA */
+        .cat-grid-item.active-item .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.98) 0%, rgba(218,26,41,0.6) 100%); }
+        
+        /* TEXTO SOBRE LA IMAGEN DE FONDO */
+        .cat-label-text { font-size: 11px; font-weight: 800; color: #FFFFFF; text-align: center; line-height: 1.2; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 0.02em; }
         
         /* SECCIÓN DE FILTROS CROMÁTICA */
         .filter-section-wrapper { background-color: #F1F5F9; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 14px 16px; }
         .filter-row { max-width: 500px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: #334155; }
-        .filter-select { background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 8px 12px; font-weight: bold; cursor: pointer; outline: none; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: border 0.2s; }
-        .filter-select:focus { border-color: #DA1A29; }
+        .filter-select { background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 8px 12px; font-weight: bold; cursor: pointer; outline: none; }
         
         main { max-width: 500px; margin: 0 auto; padding: 16px; }
         
-        /* PANEL DE CONTENIDO: DINAMISMO EN TARJETAS */
+        /* CONTENEDORES DE TARJETAS HORIZONTALES RESTAURADOS */
         .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 14px; padding: 18px; margin-bottom: 16px; text-align: left; box-shadow: 0 6px 15px rgba(218,26,41,0.06); position: relative; overflow: hidden; }
         .card-emergency::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background-color: #DA1A29; }
         
-        /* Tarjetas flotantes horizontales de alta fidelidad */
         .card-premium { background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(15,23,42,0.03); display: flex; gap: 16px; text-align: left; transition: transform 0.2s, box-shadow 0.2s; }
         .card-premium:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
-        .card-photo-box { width: 95px; height: 95px; background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%); border: 1px solid #E2E8F0; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .card-photo-box { width: 95px; height: 95px; background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%); border: 1px solid #E2E8F0; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; }
         .card-body { flex: 1; min-width: 0; }
         
-        /* TIPOGRAFÍAS DE ALTA DENSIDAD INTERACTIVA */
         .biz-title { margin: 0; font-size: 16px; font-weight: 800; color: #0F172A; line-height: 1.25; }
-        .biz-title:hover { color: #DA1A29; cursor: pointer; }
         .stars-row { display: flex; align-items: center; gap: 6px; margin-top: 5px; font-size: 12px; }
         .stars-vector { color: #EA580C; font-size: 13px; letter-spacing: -1px; font-weight: 900; }
         .meta-line { font-size: 12px; color: #64748B; font-weight: 600; margin-top: 2px; }
@@ -76,7 +70,7 @@
 </head>
 <body>
 
-    <!-- CABECERA TEXTUAL LIMPIA Y MODERNA -->
+    <!-- CABECERA TEXTUAL LIMPIA -->
     <header>
         <div onclick="resetSearch()" style="cursor: pointer;">
             <h1 class="logo-text">Quillón<span>enLínea</span></h1>
@@ -90,37 +84,45 @@
         </div>
     </header>
 
-    <!-- CUADRÍCULA DE NAVEGACIÓN CROMÁTICA VIBRANTE DE 2 FILAS CONECTADAS (ESTILO YELP) -->
+    <!-- CUADRÍCULA COMPLETA DE 8 CASILLAS RECONSTRUIDAS CON IMÁGENES FOTOGRÁFICAS DE FONDO (ESTILO YELP PREMIUM) -->
     <div class="categories-grid">
-        <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-grid-item active-item">
-            <div class="cat-icon-wrap color-todo">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 11h5V4H4v7zm0 9h5v-7H4v7zm7 0h5v-7h-5v7zm7 0h5v-7h-5v7zm-7-9h5V4h-5v7zm7-7v7h5V4h-5z"/></svg>
-            </div>
+        <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-grid-item img-todo active-item">
+            <div class="cat-overlay"></div>
             <div class="cat-label-text">Ver Todo</div>
         </button>
-        <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap color-rest">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8h2V2c-2.5 0-4.5 1.8-4.5 4z"/></svg>
-            </div>
+        <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-grid-item img-rest">
+            <div class="cat-overlay"></div>
             <div class="cat-label-text">Restaurantes</div>
         </button>
-        <button onclick="executeCategoryFilter('turismo', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap color-cab">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            </div>
+        <button onclick="executeCategoryFilter('turismo', this)" class="cat-grid-item img-cab">
+            <div class="cat-overlay"></div>
             <div class="cat-label-text">Cabañas</div>
         </button>
-        <button onclick="executeCategoryFilter('vinos', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap color-vin">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M5.67 5H18.33l-1 4H6.67l-1-4zM12 14.5c-2.48 0-4.5-2.02-4.5-4.5h9c0 2.48-2.02 4.5-4.5 4.5zM11 15v5H7v2h10v-2h-4v-5h-2z"/></svg>
-            </div>
+        <button onclick="executeCategoryFilter('vinos', this)" class="cat-grid-item img-vin">
+            <div class="cat-overlay"></div>
             <div class="cat-label-text">Viñedos</div>
         </button>
-        <button onclick="executeCategoryFilter('delivery', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap color-del">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12.5-4.5H15V9.5h3.5l2 3.5h-2zM18 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-            </div>
+        <button onclick="executeCategoryFilter('delivery', this)" class="cat-grid-item img-del">
+            <div class="cat-overlay"></div>
             <div class="cat-label-text">Delivery</div>
         </button>
-        <button onclick="executeCategoryFilter('servicios', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap color-serv">
+        <button onclick="executeCategoryFilter('servicios', this)" class="cat-grid-item img-serv">
+            <div class="cat-overlay"></div>
+            <div class="cat-label-text">Turnos 24/7</div>
+        </button>
+        <button onclick="executeCategoryFilter('turismo-act', this)" class="cat-grid-item img-tur">
+            <div class="cat-overlay"></div>
+            <div class="cat-label-text">Turismo</div>
+        </button>
+        <button onclick="resetSearch()" class="cat-grid-item img-mas">
+            <div class="cat-overlay"></div>
+            <div class="cat-label-text">Más filtros</div>
+        </button>
+    </div>
+
+    <!-- FILTROS DE COSTO ADAPTADOS CON FONDO GRIS YELP -->
+    <div class="filter-section-wrapper">
+        <div class="filter-row">
+            <div>
+                <span>Filtrar por Costo: </span>
+                <select id="price-select" onchange="executePriceFilter(this)" class="filter-select">
