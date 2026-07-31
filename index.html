@@ -4,29 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea - El Yelp de la Comuna</title>
-    <!-- Motor de diseño y estilos estables de producción -->
+    <!-- Inyección del motor de diseño oficial -->
     <script src="https://tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <link href="https://googleapis.com" rel="stylesheet">
-    <script>
-        window.tailwindConfig = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Open Sans', 'sans-serif'] },
-                    colors: {
-                        yelp: { red: '#DA1A29', hoverRed: '#B2121E', dark: '#111212', grayBg: '#F5F5F5', border: '#E7E7E7', textGray: '#6E7072', starGold: '#F15C22', blueLink: '#0073BB' }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        body { font-family: 'Open Sans', sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; -webkit-font-smoothing: antialiased; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        body { font-family: sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; }
         .badge-open { background-color: #F2F9F3; color: #107A32; }
         .badge-closed { background-color: #FFF2F3; color: #C9212D; }
-        .fade-in { animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="bg-[#F5F5F5] min-h-screen text-[#111212]">
@@ -34,22 +17,14 @@
     <!-- ENGINE DE DATOS INTERACTIVOS (JAVASCRIPT) -->
     <script>
         const database = [
-            { id: 1, nombre: "Complejo Turístico Laguna Esmeralda Artificial", categoria: "turismo", subcat: "Cabañas con Guardia y Cámaras", rating: 4.8, opinionesCount: 142, precio: 3, direccion: "Av. Circunvalación #1820, sector Laguna", telefono: "+56911112222", abierto: true, premium: true, emergencia: false, tags: ["Piscina", "Seguridad 24/7", "Cámaras"], infoAdicional: ["Cabañas Equipadas: $55.000 CLP / Noche"], coords: { lat: -36.7412, lng: -72.4789 }, reviews: { usuario: "Carlos M.", texto: "Excelente seguridad y las cámaras dan total tranquilidad.", estrellas: 5 } },
-            { id: 2, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", categoria: "gastronomia", subcat: "Parrilladas y Comida Rápida", rating: 4.6, opinionesCount: 89, precio: 2, direccion: "Bernardo O'Higgins #720, Quillón Urbano", telefono: "+56933334444", abierto: true, premium: true, emergencia: false, tags: ["Delivery", "Terraza", "Vinos"], infoAdicional: ["Parrillada Premium: $28.000 CLP"], coords: { lat: -36.7445, lng: -72.4755 }, reviews: { usuario: "Pedro S.", texto: "El reparto a las cabañas llegó caliente.", estrellas: 5 } },
-            { id: 3, nombre: "Vulcanización y Asistencia Central 24/7 Artificial", categoria: "servicios", subcat: "Vulcanizaciones 24/7", rating: 4.9, opinionesCount: 64, precio: 2, direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)", telefono: "+56955556666", abierto: true, premium: true, emergencia: true, tags: ["Atención Domingo", "Servicio en Ruta"], infoAdicional: ["Atención Inmediata 24 Horas"], coords: { lat: -36.7210, lng: -72.4912 }, reviews: { usuario: "Juan K.", texto: "Me salvaron un domingo en la madrugada.", estrellas: 5 } },
-            { id: 4, nombre: "Viña Ancestral Los Valles Ocultos Artificial", categoria: "turismo", subcat: "Viñas abiertas hoy", rating: 4.7, opinionesCount: 37, precio: 3, direccion: "Camino Cerro Negro, Km 4.5", telefono: "+56977778888", abierto: false, premium: true, emergencia: false, tags: ["Catas Guiadas", "Turismo Invierno"], infoAdicional: ["Tour con Enólogo: $15.000 CLP"], coords: { lat: -36.7522, lng: -72.4631 }, reviews: { usuario: "Marta R.", texto: "Muy buena la cata de vinos.", estrellas: 4 } },
-            { id: 5, nombre: "Panadería y Pastelería Delicias del Pueblo Artificial", categoria: "gastronomia", subcat: "Pastelerías", rating: 4.1, opinionesCount: 4, precio: 1, direccion: "Vicente Méndez #140", telefono: "", abierto: true, premium: false, emergencia: false, tags: ["Local Físico"], infoAdicional: [], coords: { lat: -36.7431, lng: -72.4761 }, reviews: { usuario: "Anónimo", texto: "Buen pan tradicional de la zona.", estrellas: 4 } }
+            { id: 1, nombre: "Complejo Turístico Laguna Esmeralda Artificial", categoria: "turismo", subcat: "Cabañas con Guardia y Cámaras", rating: "⭐⭐⭐⭐⭐", opinionesCount: 142, precio: "$$$", direccion: "Av. Circunvalación #1820, sector Laguna", telefono: "+56911112222", abierto: true, premium: true, emergencia: false, tags: ["Piscina", "Seguridad 24/7", "Cámaras"], infoAdicional: "Cabañas Equipadas: $55.000 CLP / Noche", reviewTexto: "Excelente seguridad y las cámaras dan total tranquilidad." },
+            { id: 2, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", categoria: "gastronomia", subcat: "Parrilladas y Comida Rápida", rating: "⭐⭐⭐⭐", opinionesCount: 89, precio: "$$", direccion: "Bernardo O'Higgins #720, Quillón Urbano", telefono: "+56933334444", abierto: true, premium: true, emergencia: false, tags: ["Delivery", "Terraza", "Vinos"], infoAdicional: "Parrillada Premium: $28.000 CLP", reviewTexto: "El reparto a las cabañas llegó caliente." },
+            { id: 3, nombre: "Vulcanización y Asistencia Central 24/7 Artificial", categoria: "servicios", subcat: "Vulcanizaciones 24/7", rating: "⭐⭐⭐⭐⭐", opinionesCount: 64, precio: "$$", direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)", telefono: "+56955556666", abierto: true, premium: true, emergencia: true, tags: ["Atención Domingo", "Servicio en Ruta"], infoAdicional: "Atención Inmediata 24 Horas", reviewTexto: "Me salvaron un domingo en la madrugada." },
+            { id: 4, nombre: "Viña Ancestral Los Valles Ocultos Artificial", categoria: "turismo", subcat: "Viñas abiertas hoy", rating: "⭐⭐⭐⭐", opinionesCount: 37, precio: "$$$", direccion: "Camino Cerro Negro, Km 4.5", telefono: "+56977778888", abierto: false, premium: true, emergencia: false, tags: ["Catas Guiadas", "Turismo Invierno"], infoAdicional: "Tour con Enólogo: $15.000 CLP", reviewTexto: "Muy buena la cata de vinos." },
+            { id: 5, nombre: "Panadería y Pastelería Delicias del Pueblo Artificial", categoria: "gastronomia", subcat: "Pastelerías", rating: "⭐⭐⭐⭐", opinionesCount: 4, precio: "$", direccion: "Vicente Méndez #140", telefono: "", abierto: true, premium: false, emergencia: false, tags: ["Local Físico"], infoAdicional: "", reviewTexto: "Buen pan tradicional de la zona." }
         ];
 
-        let appState = { cat: 'todos', search: '', precio: 'todos', abiertoOnly: false };
-
-        function generateStars(rating) {
-            let html = '';
-            for (let i = 1; i <= 5; i++) {
-                html += i <= Math.floor(rating) ? `<i class="fas fa-star text-[#F15C22] mr-0.5"></i>` : `<i class="far fa-star text-[#E7E7E7] mr-0.5"></i>`;
-            }
-            return html;
-        }
+        let appState = { cat: 'todos', search: '' };
 
         function filterAndRender() {
             const container = document.getElementById('main-directory-render');
@@ -58,16 +33,15 @@
 
             const filtered = database.filter(item => {
                 const mCat = appState.cat === 'todos' || item.categoria === appState.cat;
-                const mSearch = item.nombre.toLowerCase().includes(appState.search.toLowerCase()) || item.tags.some(t => t.toLowerCase().includes(appState.search.toLowerCase())) || item.subcat.toLowerCase().includes(appState.search.toLowerCase());
-                const mPrice = appState.precio === 'todos' || item.precio === parseInt(appState.precio);
-                const mOpen = !appState.abiertoOnly || item.abierto;
-                return mCat && mSearch && mPrice && mOpen;
+                const mSearch = item.nombre.toLowerCase().includes(appState.search.toLowerCase()) || 
+                                item.tags.some(t => t.toLowerCase().includes(appState.search.toLowerCase())) || 
+                                item.subcat.toLowerCase().includes(appState.search.toLowerCase());
+                return mCat && mSearch;
             });
 
             filtered.sort((a, b) => (b.emergencia - a.emergencia) || (b.premium - a.premium));
 
-            const counterEl = document.getElementById('global-counter');
-            if(counterEl) counterEl.innerText = `${filtered.length} locales listados`;
+            document.getElementById('global-counter').innerText = `${filtered.length} locales listados`;
 
             if (filtered.length === 0) {
                 container.innerHTML = `<div class="text-center py-16 bg-white border border-[#E7E7E7] rounded-xl"><p class="text-[#6E7072] font-bold">Sin resultados en Quillón.</p></div>`;
@@ -75,39 +49,78 @@
             }
 
             filtered.forEach(item => {
-                const priceIndicator = "$".repeat(item.precio);
                 let html = '';
                 if (item.emergencia) {
                     html = `
-                        <div class="bg-red-50 border-2 border-[#DA1A29] rounded-xl p-5 mb-4 flex flex-col sm:flex-row justify-between items-center gap-4 fade-in">
-                            <div class="flex items-center gap-3">
-                                <div class="bg-[#DA1A29] text-white w-10 h-10 rounded-full flex items-center justify-center text-sm shrink-0 shadow-md"><i class="fas fa-phone-alt animate-pulse"></i></div>
-                                <div>
-                                    <span class="bg-[#DA1A29] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-sm">TURNO 24/7</span>
-                                    <h3 class="text-base font-black text-[#111212] mt-0.5 tracking-tight">${item.nombre}</h3>
-                                    <p class="text-xs text-red-700 font-bold">${item.subcat}</p>
-                                    <p class="text-xs text-gray-500 font-medium"><i class="fas fa-map-marker-alt"></i> ${item.direccion}</p>
-                                </div>
+                        <div class="bg-red-50 border-2 border-[#DA1A29] rounded-xl p-5 mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <div>
+                                <span class="bg-[#DA1A29] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-sm">⚠️ TURNO 24/7</span>
+                                <h3 class="text-base font-black text-[#111212] mt-0.5 tracking-tight">${item.nombre}</h3>
+                                <p class="text-xs text-red-700 font-bold">${item.subcat}</p>
+                                <p class="text-xs text-gray-500 font-medium">📍 ${item.direccion}</p>
                             </div>
-                            <a href="tel:${item.telefono}" class="w-full sm:w-auto bg-[#DA1A29] hover:bg-[#B2121E] text-white text-xs font-black px-4 py-3 rounded-lg text-center shadow-sm block tracking-wide shrink-0">LLAMAR POR EMERGENCIA</a>
+                            <a href="tel:${item.telefono}" class="w-full sm:w-auto bg-[#DA1A29] text-white text-xs font-black px-4 py-3 rounded-lg text-center shadow-sm block tracking-wide shrink-0">📞 LLAMAR POR EMERGENCIA</a>
                         </div>`;
                 } else if (item.premium) {
                     html = `
-                        <div class="bg-white border border-[#E7E7E7] rounded-xl p-5 mb-4 shadow-sm relative fade-in">
-                            <div class="absolute top-0 right-0 bg-amber-500 text-white text-[9px] font-black px-2 py-0.5 rounded-bl-lg tracking-wider"><i class="fas fa-star text-[8px]"></i> PREMIUM</div>
+                        <div class="bg-white border border-[#E7E7E7] rounded-xl p-5 mb-4 shadow-sm relative">
+                            <div class="absolute top-0 right-0 bg-amber-500 text-white text-[9px] font-black px-2 py-0.5 rounded-bl-lg tracking-wider">👑 PREMIUM</div>
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <div class="w-full sm:w-32 h-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded border flex items-center justify-center text-gray-400 text-2xl shrink-0"><i class="fas fa-store"></i></div>
+                                <div class="w-full sm:w-32 h-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded border flex items-center justify-center text-gray-400 text-xs font-bold shrink-0">🏠 COMERCIO</div>
                                 <div class="flex-1">
                                     <span class="text-[10px] text-gray-400 font-extrabold uppercase block tracking-tight">${item.subcat}</span>
                                     <h3 class="text-base font-bold text-[#111212] mt-0.5 leading-tight hover:text-[#0073BB] cursor-pointer">${item.nombre}</h3>
                                     <div class="flex items-center gap-2 mt-1">
-                                        <div class="flex text-xs">${generateStars(item.rating)}</div>
-                                        <span class="text-xs font-black text-gray-800">${item.rating}</span>
-                                        <span class="text-xs text-[#6E7072] font-semibold">(${item.opinionesCount} opiniones) • ${priceIndicator}</span>
+                                        <div class="flex text-xs">${item.rating}</div>
+                                        <span class="text-xs text-[#6E7072] font-semibold">(${item.opinionesCount} opiniones) • ${item.precio}</span>
                                         <span class="text-[10px] font-bold px-1.5 py-0.2 bg-green-50 text-green-700 rounded">${item.abierto ? 'Abierto' : 'Cerrado'}</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-1.5 font-medium"><i class="fas fa-map-marker-alt text-gray-300"></i> ${item.direccion}</p>
-                                    <div class="mt-2.5 bg-gray-50/80 border border-gray-100 p-2.5 rounded-md text-xs text-gray-600 font-medium">
-                                        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5">Última opinión de turistas:</span>
-                                        "${item.reviews.texto}"
+                                    <p class="text-xs text-gray-500 mt-1.5 font-medium">📍 ${item.direccion}</p>
+                                    <div class="mt-2 bg-gray-50 border border-gray-100 p-2 rounded-md text-xs text-gray-600 font-medium">
+                                        <strong>Última opinión:</strong> "${item.reviewTexto}"
                                     </div>
+                                    <div class="mt-4 pt-2.5 border-t border-gray-100 flex justify-between items-center">
+                                        <div class="flex gap-2 text-xs font-bold text-green-600">💬 WhatsApp Activo</div>
+                                        <div class="flex gap-1.5">
+                                            <a href="tel:${item.telefono}" class="bg-[#DA1A29] text-white text-xs font-bold px-3 py-1.5 rounded-md shadow-sm no-underline">Contactar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                } else {
+                    html = `
+                        <div class="bg-white border border-[#E7E7E7] rounded-xl p-4 mb-2 opacity-80 shadow-sm">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-[9px] text-gray-400 font-bold uppercase block">${item.subcat}</span>
+                                    <h4 class="text-sm font-bold text-gray-700 mt-0.5">${item.nombre}</h4>
+                                    <p class="text-xs text-gray-400 mt-1 font-medium">📍 ${item.direccion}</p>
+                                </div>
+                                <span class="text-[8px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">Ficha Básica</span>
+                            </div>
+                        </div>`;
+                }
+                container.innerHTML += html;
+            });
+        }
+
+        function setPrimaryCategory(c, el) {
+            appState.cat = c;
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('border-[#DA1A29]', 'text-[#DA1A29]', 'font-bold');
+                b.classList.add('border-transparent', 'text-gray-500');
+            });
+            el.classList.remove('border-transparent', 'text-gray-500');
+            el.classList.add('border-[#DA1A29]', 'text-[#DA1A29]', 'font-bold');
+            filterAndRender();
+        }
+
+        function handleSearchInput(v) { appState.search = v; filterAndRender(); }
+        window.onload = () => { filterAndRender(); };
+    </script>
+
+    <!-- INTERFAZ VISUAL (DOM) -->
+    <header class="bg-white border-b border-[#E7E7E7] sticky top-0 z-50 px-4 py-3.5 shadow-sm">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2.5 shrink-0 select-none">
