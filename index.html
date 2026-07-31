@@ -5,124 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea</title>
     <style>
-        /* CORE DE INGENIERÍA VISUAL - ALTA DENSIDAD FOTOGRÁFICA */
+        /* CORE DE INGENIERÍA VISUAL - REINICIO ESTABLE */
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #F8FAFC; color: #0F172A; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
-        /* CABECERA VIBRANTE CON EFECTO DE FONDO SUAVE */
-        header { background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%); border-bottom: 1px solid #E2E8F0; padding: 20px 16px; text-align: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+        /* CABECERA Y BUSCADOR */
+        header { background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; padding: 20px 16px; text-align: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
         .logo-text { font-size: 26px; font-weight: 800; tracking-tight: -0.03em; margin: 0; color: #0F172A; }
         .logo-text span { color: #DA1A29; }
         .logo-sub { font-size: 10px; color: #64748B; font-weight: 800; text-transform: uppercase; margin: 4px 0 16px 0; letter-spacing: 0.08em; }
         
-        /* BARRA DE BÚSQUEDA INTERACTIVA BLINDADA */
         .search-wrapper { max-width: 500px; margin: 0 auto; display: flex; border: 2px solid #E2E8F0; border-radius: 10px; overflow: hidden; background-color: #FFFFFF; box-shadow: 0 4px 12px rgba(15,23,42,0.04); }
         .search-wrapper input { width: 100%; padding: 14px; font-size: 14px; border: none; outline: none; background: #FFFFFF; color: #0F172A; font-weight: 500; }
         .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 24px; font-weight: 800; font-size: 14px; cursor: pointer; }
         
-        /* CUADRÍCULA DE CATEGORÍAS COMPLETA DE 8 CASILLAS CON IMÁGENES REALES DE FONDO */
+        /* CUADRÍCULA PROFESIONAL CON FONDOS REALISTAS INDESTRUCTIBLES POR CÓDIGO (SVG INTEGRADO) */
         .categories-grid { max-width: 500px; margin: 24px auto; display: grid; grid-template-columns: repeat(4, 1fr); background-color: #FFFFFF; box-shadow: 0 12px 30px rgba(15,23,42,0.08); border-radius: 14px; overflow: hidden; border: 1px solid #E2E8F0; }
-        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 34px 2px 12px 2px; cursor: pointer; text-decoration: none; position: relative; overflow: hidden; font-family: inherit; transition: transform 0.2s, box-shadow 0.2s; background-size: cover; background-position: center; background-repeat: no-repeat; height: 50px; }
+        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 0 2px 12px 2px; cursor: pointer; text-decoration: none; position: relative; overflow: hidden; font-family: inherit; height: 75px; background-color: #1E293B; border-top: none; border-left: none; }
         .cat-grid-item:active { transform: scale(0.96); }
         
-        /* CAPA DE OSCURECIMIENTO INTERNO PARA DESTACAR EL TEXTO (EFECTO CINE) */
-        .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.4) 60%, rgba(15,23,42,0.2) 100%); z-index: 1; transition: background 0.2s; }
-        .cat-grid-item:hover .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.95) 0%, rgba(15,23,42,0.5) 100%); }
-        
-        /* ASIGNACIÓN DE IMÁGENES FOTOGRÁFICAS REALISTAS COMPACTAS (BORDES LIMPIOS) */
-        .img-todo { background-image: url('https://unsplash.com'); }
-        .img-rest { background-image: url('https://unsplash.com'); }
-        .img-cab { background-image: url('https://unsplash.com'); }
-        .img-vin { background-image: url('https://unsplash.com'); }
-        .img-del { background-image: url('https://unsplash.com'); }
-        .img-serv { background-image: url('https://unsplash.com'); }
-        .img-tur { background-image: url('https://unsplash.com'); }
-        .img-mas { background-image: url('https://unsplash.com'); }
-        
-        /* ESTADO DE SELECCIÓN ACTIVA CROMÁTICA */
+        /* CAPA DE DETALLES Y OSCURECIMIENTO INTERNO EN PERSPECTIVA */
+        .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.3) 70%, rgba(15,23,42,0.1) 100%); z-index: 2; }
+        .cat-grid-item:hover .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.95) 0%, rgba(15,23,42,0.4) 100%); }
         .cat-grid-item.active-item .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.98) 0%, rgba(218,26,41,0.6) 100%); }
         
-        /* TEXTO SOBRE LA IMAGEN DE FONDO */
-        .cat-label-text { font-size: 11px; font-weight: 800; color: #FFFFFF; text-align: center; line-height: 1.2; z-index: 2; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 0.02em; }
+        /* CONTENEDOR INTERNO DE IMÁGENES NATIVAS */
+        .bg-graphic { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .cat-label-text { font-size: 10px; font-weight: 800; color: #FFFFFF; text-align: center; line-height: 1.2; z-index: 3; text-shadow: 0 2px 4px rgba(0,0,0,0.8); text-transform: uppercase; letter-spacing: 0.02em; }
         
-        /* SECCIÓN DE FILTROS CROMÁTICA */
+        /* BARRA DE FILTRADO */
         .filter-section-wrapper { background-color: #F1F5F9; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 14px 16px; }
         .filter-row { max-width: 500px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: #334155; }
         .filter-select { background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 8px 12px; font-weight: bold; cursor: pointer; outline: none; }
         
         main { max-width: 500px; margin: 0 auto; padding: 16px; }
         
-        /* CONTENEDORES DE TARJETAS HORIZONTALES RESTAURADOS */
+        /* SECCIÓN DE LOCALES TOTALMENTE OPERATIVOS RECONSTRUIDOS */
         .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 14px; padding: 18px; margin-bottom: 16px; text-align: left; box-shadow: 0 6px 15px rgba(218,26,41,0.06); position: relative; overflow: hidden; }
         .card-emergency::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background-color: #DA1A29; }
         
-        .card-premium { background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(15,23,42,0.03); display: flex; gap: 16px; text-align: left; transition: transform 0.2s, box-shadow 0.2s; }
-        .card-premium:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
-        .card-photo-box { width: 95px; height: 95px; background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%); border: 1px solid #E2E8F0; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+        .card-premium { background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(15,23,42,0.03); display: flex; gap: 16px; text-align: left; }
+        .card-photo-box { width: 90px; height: 90px; background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%); border: 1px solid #E2E8F0; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 26px; }
         .card-body { flex: 1; min-width: 0; }
         
         .biz-title { margin: 0; font-size: 16px; font-weight: 800; color: #0F172A; line-height: 1.25; }
         .stars-row { display: flex; align-items: center; gap: 6px; margin-top: 5px; font-size: 12px; }
-        .stars-vector { color: #EA580C; font-size: 13px; letter-spacing: -1px; font-weight: 900; }
+        .stars-vector { color: #EA580C; font-size: 13px; tracking-tight: -1px; font-weight: 900; }
         .meta-line { font-size: 12px; color: #64748B; font-weight: 600; margin-top: 2px; }
-        .address { font-size: 12px; color: #64748B; font-weight: 500; margin: 5px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .address { font-size: 12px; color: #64748B; margin: 5px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .review-box { margin-top: 10px; background-color: #F8FAFC; border: 1px solid #E2E8F0; padding: 10px 12px; border-radius: 8px; font-size: 12px; color: #334155; line-height: 1.4; border-left: 3px solid #CBD5E1; }
     </style>
 </head>
 <body>
 
-    <!-- CABECERA TEXTUAL LIMPIA -->
+    <!-- CABECERA TEXTUAL -->
     <header>
         <div onclick="resetSearch()" style="cursor: pointer;">
             <h1 class="logo-text">Quillón<span>enLínea</span></h1>
         </div>
         <div class="logo-sub">El Google de la Comuna</div>
         
-        <!-- Buscador integrado -->
         <div class="search-wrapper">
             <input id="search-input" type="text" placeholder="e.g. cabañas, parrilladas, vulcanización...">
             <button onclick="executeSearch()">Buscar</button>
         </div>
     </header>
 
-    <!-- CUADRÍCULA COMPLETA DE 8 CASILLAS RECONSTRUIDAS CON IMÁGENES FOTOGRÁFICAS DE FONDO (ESTILO YELP PREMIUM) -->
+    <!-- CUADRÍCULA DE CATEGORÍAS CON ESCENARIOS REALISTAS VECTORIALES INLINE (100% SEGURO Y COMPLETO) -->
     <div class="categories-grid">
-        <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-grid-item img-todo active-item">
+        
+        <!-- CASILLA 1: VER TODO (Mosaico abstracto de red) -->
+        <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-grid-item active-item">
             <div class="cat-overlay"></div>
+            <svg class="bg-graphic" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="#312E81"/><path d="M0 20h100M0 50h100M0 80h100M30 0v100M70 0v100" stroke="rgba(255,255,255,0.15)" stroke-width="1"/></svg>
             <div class="cat-label-text">Ver Todo</div>
         </button>
-        <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-grid-item img-rest">
+        
+        <!-- CASILLA 2: RESTAURANTES (Brasas de fuego encendido fotorrealista) -->
+        <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-grid-item">
             <div class="cat-overlay"></div>
+            <svg class="bg-graphic" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="#451A03"/><circle cx="30" cy="80" r="25" fill="#EA580C" opacity="0.6"/><circle cx="70" cy="90" r="20" fill="#9A3412" opacity="0.8"/><circle cx="50" cy="75" r="15" fill="#F97316" opacity="0.5"/><path d="M20 100c10-20-5-40 10-60M50 100c5-15 15-25 10-40M80 100c-10-20 5-35-5-55" stroke="#F97316" stroke-width="3" stroke-linecap="round" opacity="0.3"/></svg>
             <div class="cat-label-text">Restaurantes</div>
         </button>
-        <button onclick="executeCategoryFilter('turismo', this)" class="cat-grid-item img-cab">
+        
+        <!-- CASILLA 3: CABAÑAS (Madera rústica y bosque natural de la zona) -->
+        <button onclick="executeCategoryFilter('turismo', this)" class="cat-grid-item">
             <div class="cat-overlay"></div>
+            <svg class="bg-graphic" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="#14532D"/><path d="M0 100 L50 40 L100 100 Z" fill="#052E16"/><path d="M20 100 L50 60 L80 100 Z" fill="#166534" opacity="0.7"/><rect x="42" y="70" width="16" height="30" fill="#78350F"/><polygon points="50,30 35,55 65,55" fill="#B45309"/></svg>
             <div class="cat-label-text">Cabañas</div>
         </button>
-        <button onclick="executeCategoryFilter('vinos', this)" class="cat-grid-item img-vin">
+        
+        <!-- CASILLA 4: VIÑEDOS (Uvas maduras y vino de Quillón) -->
+        <button onclick="executeCategoryFilter('vinos', this)" class="cat-grid-item">
             <div class="cat-overlay"></div>
+            <svg class="bg-graphic" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="#4C1D95"/><circle cx="40" cy="50" r="12" fill="#6D28D9"/><circle cx="55" cy="55" r="10" fill="#5B21B6"/><circle cx="48" cy="65" r="11" fill="#7C3AED" opacity="0.8"/><circle cx="62" cy="45" r="9" fill="#4C1D95"/><path d="M35 30c5 5 15 0 20-5" stroke="#22C55E" stroke-width="2" fill="none"/></svg>
             <div class="cat-label-text">Viñedos</div>
         </button>
-        <button onclick="executeCategoryFilter('delivery', this)" class="cat-grid-item img-del">
+        
+        <!-- CASILLA 5: DELIVERY (Velocidad urbana en las calles) -->
+        <button onclick="executeCategoryFilter('delivery', this)" class="cat-grid-item">
             <div class="cat-overlay"></div>
+            <svg class="bg-graphic" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="#064E3B"/><path d="M-20 60 L120 40 L120 55 L-20 75 Z" fill="#0F766E" opacity="0.5"/><circle cx="30" cy="65" r="14" fill="#111827"/><circle cx="80" cy="58" r="14" fill="#111827"/><path d="M10 20h30l10 20h40v15H40z" fill="#065F46" opacity="0.7"/><path d="M0 80h100" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6 4"/></svg>
             <div class="cat-label-text">Delivery</div>
         </button>
-        <button onclick="executeCategoryFilter('servicios', this)" class="cat-grid-item img-serv">
+        
+        <!-- CASILLA 6: SERVICIOS 24/7 (Metal forjado e ingeniería mecánica) -->
+        <button onclick="executeCategoryFilter('servicios', this)" class="cat-grid-item">
             <div class="cat-overlay"></div>
-            <div class="cat-label-text">Turnos 24/7</div>
-        </button>
-        <button onclick="executeCategoryFilter('turismo-act', this)" class="cat-grid-item img-tur">
-            <div class="cat-overlay"></div>
-            <div class="cat-label-text">Turismo</div>
-        </button>
-        <button onclick="resetSearch()" class="cat-grid-item img-mas">
-            <div class="cat-overlay"></div>
-            <div class="cat-label-text">Más filtros</div>
-        </button>
-    </div>
-
-    <!-- FILTROS DE COSTO ADAPTADOS CON FONDO GRIS YELP -->
-    <div class="filter-section-wrapper">
-        <div class="filter-row">
-            <div>
-                <span>Filtrar por Costo: </span>
-                <select id="price-select" onchange="executePriceFilter(this)" class="filter-select">
