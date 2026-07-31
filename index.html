@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea</title>
     <style>
-        /* ESTILOS NATIVOS FIJOS - ALTA DENSIDAD ESTILO DIRECTORIO */
+        /* ESTILOS NATIVOS FIJOS - INTERFAZ INTEGRAL ESTILO YELP */
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; padding: 0; }
         
-        /* CABECERA PRINCIPAL CON MARCA Y BUSCADOR */
+        /* CABECERA CON MARCA TEXTUAL LIMPIA Y BUSCADOR */
         header { background-color: #FFFFFF; border-bottom: 1px solid #E7E7E7; padding: 16px; text-align: center; }
-        .logo-box { background-color: #DA1A29; color: #FFFFFF; width: 36px; height: 36px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; }
-        .logo-text { font-size: 22px; font-weight: 800; display: inline-block; vertical-align: middle; margin-left: 8px; tracking-tight: -0.02em; }
+        .logo-text { font-size: 24px; font-weight: 800; tracking-tight: -0.02em; margin: 0; }
         .logo-text span { color: #DA1A29; }
-        .logo-sub { font-size: 10px; color: #6E7072; font-weight: bold; text-transform: uppercase; margin-top: 4px; letter-spacing: 0.05em; }
+        .logo-sub { font-size: 10px; color: #6E7072; font-weight: bold; text-transform: uppercase; margin: 4px 0 14px 0; letter-spacing: 0.05em; }
         
         /* BARRA DE BÚSQUEDA COMPACTA */
-        .search-wrapper { max-width: 500px; margin: 14px auto 0 auto; display: flex; border: 1px solid #A3A3A3; border-radius: 6px; overflow: hidden; background-color: #FFFFFF; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); }
+        .search-wrapper { max-width: 500px; margin: 0 auto; display: flex; border: 1px solid #A3A3A3; border-radius: 6px; overflow: hidden; background-color: #FFFFFF; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); }
         .search-wrapper input { width: 100%; padding: 10px 12px; font-size: 13px; border: none; outline: none; background: #FFFFFF; color: #111212; font-weight: 500; }
-        .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 16px; font-weight: bold; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+        .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 16px; font-weight: bold; font-size: 13px; cursor: pointer; }
         .search-wrapper button:hover { background-color: #B2121E; }
         
         /* FILTROS SECUNDARIOS DE COSTO */
@@ -27,28 +26,32 @@
         
         main { max-width: 600px; margin: 0 auto; padding: 16px; }
         
-        /* TARJETAS OPERATIVAS CON ALINEACIÓN HORIZONTAL */
+        /* TARJETA DE EMERGENCIAS */
         .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
         
-        /* Estructura horizontal limpia para los locales destacados */
-        .card-premium { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: row; gap: 16px; align-items: flex-start; }
-        .card-body { flex: 1; }
+        /* ESTRUCTURA HORIZONTAL VERDADERA ESTILO YELP MOBILE */
+        .card-premium { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; gap: 14px; }
+        .card-photo-box { width: 80px; height: 80px; background-color: #E5E7EB; border: 1px solid #D1D5DB; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .card-body { flex: 1; min-width: 0; }
         
-        .stars { color: #F15C22; font-weight: bold; font-size: 14px; }
-        .address { font-size: 12px; color: #6E7072; margin: 4px 0 0 0; }
-        .review-box { margin-top: 10px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 10px; border-radius: 6px; font-size: 12px; color: #4A4A4A; }
+        /* TIPOGRAFÍAS DE ALTA DENSIDAD */
+        .biz-title { margin: 0; font-size: 15px; font-weight: 700; color: #111212; line-height: 1.2; }
+        .stars { color: #F15C22; font-weight: bold; font-size: 13px; }
+        .meta-line { font-size: 11px; color: #6E7072; margin-top: 2px; }
+        .address { font-size: 11px; color: #6E7072; margin: 4px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .review-box { margin-top: 8px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 8px 10px; border-radius: 6px; font-size: 11px; color: #4A4A4A; line-height: 1.3; }
     </style>
 </head>
 <body>
 
-    <!-- CABECERA OFICIAL CON TÍTULO DE MARCA Y BUSCADOR -->
+    <!-- CABECERA OFICIAL TOTALMENTE TEXTUAL Y LIMPIA -->
     <header>
         <div onclick="resetSearch()" style="cursor: pointer;">
-            <div class="logo-box">Q!</div>
-            <div class="logo-text">Quillón<span>enLínea</span></div>
+            <h1 class="logo-text">Quillón<span>enLínea</span></h1>
         </div>
         <div class="logo-sub">El Google de la Comuna</div>
         
+        <!-- Buscador integrado -->
         <div class="search-wrapper">
             <input id="search-input" type="text" placeholder="Buscar por palabra clave (Ej. cabañas, carne)...">
             <button onclick="executeSearch()">Buscar</button>
@@ -69,17 +72,17 @@
         <span id="counter-label" style="color: #9B9B9B; font-size: 11px; font-weight: bold;">Locales listados</span>
     </div>
 
-    <!-- LIENZO DONDE EL MOTOR INYECTA LOS COMERCIOS -->
+    <!-- LIENZO PRINCIPAL -->
     <main id="directory-target"></main>
 
-    <!-- MOTOR DE LOGÍSTICA DE FILTRADO -->
+    <!-- MOTOR LOGÍSTICO INTERNO -->
     <script>
         var searchCriteria = { text: '', price: 'todos' };
 
         var database = [
-            { id: 1, nombre: "Vulcanización y Asistencia Central Artificial", subcat: "Vulcanizaciones 24/7", rating: "★★★★★", opiniones: 64, precio: "2", direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)", user: "Juan K.", text: "Me salvaron un domingo en la madrugada en la ruta.", emergencia: true },
-            { id: 2, nombre: "Complejo Turístico Laguna Esmeralda Artificial", subcat: "Cabañas con Guardia y Cámaras", rating: "★★★★★", opiniones: 142, precio: "3", direccion: "Av. Circunvalación #1820, sector Laguna", user: "Carlos M.", text: "Excelente seguridad, las cámaras dan total tranquilidad.", emergencia: false },
-            { id: 3, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", subcat: "Parrilladas y Comida Rápida", rating: "★★★★☆", opiniones: 89, precio: "2", direccion: "Bernardo O'Higgins #720, Quillón Urbano", user: "Pedro S.", text: "El reparto a las cabañas llegó caliente y sabroso.", emergencia: false }
+            { id: 1, nombre: "Vulcanización y Asistencia Central Artificial", subcat: "Vulcanizaciones 24/7", icon: "🛠️", rating: "★★★★★", opiniones: 64, precio: "2", direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)", text: "Me salvaron un domingo en la madrugada en la ruta.", emergencia: true },
+            { id: 2, nombre: "Complejo Turístico Laguna Esmeralda Artificial", subcat: "Cabañas con Guardia y Cámaras", icon: "🏠", rating: "★★★★★", opiniones: 142, precio: "3", direccion: "Av. Circunvalación #1820, sector Laguna", text: "Excelente seguridad, las cámaras dan total tranquilidad.", emergencia: false },
+            { id: 3, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", subcat: "Parrilladas y Comida Rápida", icon: "🥩", rating: "★★★★☆", opiniones: 89, precio: "2", direccion: "Bernardo O'Higgins #720, Quillón Urbano", text: "El reparto a las cabañas llegó caliente y sabroso.", emergencia: false }
         ];
 
         function render() {
@@ -99,13 +102,11 @@
                 }
             }
 
-            // Las alertas de emergencia se fijan siempre arriba
             filtered.sort(function(a, b) { return b.emergencia - a.emergencia; });
-
             document.getElementById('counter-label').innerText = filtered.length + " locales listados";
 
             if (filtered.length === 0) {
-                container.innerHTML = '<p style="text-align:center; font-weight:bold; color:gray; padding:20px;">Sin resultados para tu búsqueda.</p>';
+                container.innerHTML = '<p style="text-align:center; font-weight:bold; color:gray; padding:20px;">Sin resultados.</p>';
                 return;
             }
 
@@ -123,19 +124,19 @@
                             <p class="address">📍 ` + it.direccion + `</p>
                         </div>`;
                 } else {
-                    // Diseño horizontal sin la palabra Premium
+                    // Distribución de doble columna (Foto izquierda, información derecha)
                     html = `
                         <div class="card-premium">
+                            <div class="card-photo-box">` + it.icon + `</div>
                             <div class="card-body">
-                                <span style="font-size: 10px; color: gray; font-weight: bold; text-transform: uppercase;">` + it.subcat + `</span>
-                                <h3 style="margin: 2px 0 0 0; font-size: 16px;">` + it.nombre + `</h3>
-                                <div style="font-size: 12px; margin-top: 4px;">
-                                    <span class="stars">` + it.rating + `</span> <span style="color: gray;">(` + it.opiniones + ` opiniones) • ` + priceSymbols + `</span>
+                                <span style="font-size: 9px; color: gray; font-weight: bold; text-transform: uppercase;">` + it.subcat + `</span>
+                                <h3 class="biz-title">` + it.nombre + `</h3>
+                                <div class="meta-line">
+                                    <span class="stars">` + it.rating + `</span> <span>(` + it.opiniones + `) • ` + priceSymbols + `</span>
                                 </div>
                                 <p class="address">📍 ` + it.direccion + `</p>
                                 <div class="review-box">
-                                    <strong>Última opinión de turistas:</strong>
-                                    "` + it.text + `"
+                                    <strong>Última opinión:</strong> "` + it.text + `"
                                 </div>
                             </div>
                         </div>`;
