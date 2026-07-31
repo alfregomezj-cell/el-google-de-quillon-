@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea</title>
     <style>
-        /* CORE DE INGENIERÍA VISUAL - RENDIMIENTO ULTRA-ESTABLE NATIVO */
+        /* CORE DE INGENIERÍA VISUAL NATIVA */
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #F8FAFC; color: #0F172A; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
         /* CABECERA Y BUSCADOR */
@@ -18,49 +18,36 @@
         .search-wrapper input { width: 100%; padding: 14px; font-size: 14px; border: none; outline: none; background: #FFFFFF; color: #0F172A; font-weight: 500; }
         .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 24px; font-weight: 800; font-size: 14px; cursor: pointer; }
         
-        /* CUADRÍCULA SIMÉTRICA EXCLUSIVA - 8 BLOQUES COMPLETOS CONECTADOS */
+        /* CUADRÍCULA DE 8 CASILLAS CONECTADAS CON FOTOGRAFÍAS REALES DIRECTAS */
         .categories-grid { max-width: 500px; margin: 24px auto; display: grid; grid-template-columns: repeat(4, 1fr); background-color: #FFFFFF; box-shadow: 0 12px 30px rgba(15,23,42,0.08); border-radius: 14px; overflow: hidden; border: 1px solid #E2E8F0; }
-        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 0 2px 14px 2px; cursor: pointer; text-decoration: none; position: relative; overflow: hidden; font-family: inherit; height: 85px; border-top: none; border-left: none; }
+        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 0 2px 14px 2px; cursor: pointer; text-decoration: none; position: relative; overflow: hidden; font-family: inherit; height: 85px; background-size: cover; background-position: center; background-repeat: no-repeat; border-top: none; border-left: none; }
         .cat-grid-item:active { transform: scale(0.96); }
         
-        /* CAPA DE PROFUNDIDAD Y SOMBRAS PARA CONTROLAR LA VISIBILIDAD DEL TEXTO */
-        .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.4) 65%, rgba(15,23,42,0.1) 100%); z-index: 2; }
-        .cat-grid-item:hover .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.95) 0%, rgba(15,23,42,0.5) 100%); }
-        .cat-grid-item.active-item .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.98) 0%, rgba(218,26,41,0.6) 100%); }
+        /* CAPA DE TRANSPARENCIA PARA LEER EL TEXTO SOBRE LA FOTO REAL */
+        .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.4) 65%, rgba(15,23,42,0.1) 100%); z-index: 2; }
+        .cat-grid-item:hover .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.92) 0%, rgba(15,23,42,0.4) 100%); }
+        .cat-grid-item.active-item .cat-overlay { background: linear-gradient(to top, rgba(218,26,41,0.95) 0%, rgba(218,26,41,0.5) 100%); }
         
-        /* IMÁGENES PROCEDURALES REALISTAS GENERADAS EXCLUSIVAMENTE CON CÓDIGO CSS PURO */
-        .art-todo { background: radial-gradient(circle at 20% 30%, #312E81 0%, #1E1B4B 100%); }
-        
-        /* Restaurantes: Efecto de brasas de carbón y fuego encendido */
-        .art-rest { background: radial-gradient(ellipse at bottom, #EA580C 0%, #451A03 70%, #1C1917 100%); background-size: 100% 100%; }
-        
-        /* Cabañas: Textura procedural que emula vetas de tablones de madera rústica */
-        .art-cab { background: linear-gradient(90deg, #78350F 2px, transparent 2px), linear-gradient(0deg, #451A03 2px, transparent 2px), #312E81; background-size: 16px 16px; background-color: #543D2B; }
-        
-        /* Viñedos: Gradiente de profundidad líquida de vino tinto y uva cepa país */
-        .art-vin { background: radial-gradient(circle at top right, #7C3AED 0%, #4C1D95 50%, #2E1065 100%); }
-        
-        /* Delivery: Simulación de asfalto y ráfagas de velocidad nocturna en ruta */
-        .art-del { background: linear-gradient(135deg, #064E3B 0%, #022C22 100%); }
-        
-        /* Turnos 24/7: Textura cepillada de acero forjado mecánico industrial */
-        .art-serv { background: linear-gradient(45deg, #334155 25%, #1E293B 25%, #1E293B 50%, #334155 50%, #334155 75%, #1E293B 75%, #1E293B 100%); background-size: 20px 20px; }
-        
-        /* Turismo: Gradiente que emula los reflejos del agua del sol en la Laguna de Quillón */
-        .art-tur { background: linear-gradient(to bottom, #0284C7 0%, #0369A1 50%, #0C4A6E 100%); }
-        
-        .art-mas { background: radial-gradient(circle, #475569 0%, #1E293B 100%); }
+        /* ENLACES DE IMÁGENES REALES DE ALTA FIDELIDAD EN SERVIDORES ABIERTOS */
+        .img-real-todo { background-image: url('https://unsplash.com'); }
+        .img-real-rest { background-image: url('https://unsplash.com'); }
+        .img-real-cab { background-image: url('https://unsplash.com'); }
+        .img-real-vin { background-image: url('https://unsplash.com'); }
+        .img-real-del { background-image: url('https://unsplash.com'); }
+        .img-real-serv { background-image: url('https://unsplash.com'); }
+        .img-real-tur { background-image: url('https://unsplash.com'); }
+        .img-real-mas { background-image: url('https://unsplash.com'); }
         
         .cat-label-text { font-size: 10px; font-weight: 800; color: #FFFFFF; text-align: center; line-height: 1.2; z-index: 3; text-shadow: 0 2px 4px rgba(0,0,0,0.8); text-transform: uppercase; letter-spacing: 0.03em; }
         
-        /* FILTROS SECUNDARIOS DE COSTO */
+        /* FILTROS DE COSTO */
         .filter-section-wrapper { background-color: #F1F5F9; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 14px 16px; }
         .filter-row { max-width: 500px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: #334155; }
         .filter-select { background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 8px 12px; font-weight: bold; cursor: pointer; outline: none; }
         
         main { max-width: 500px; margin: 0 auto; padding: 16px; }
         
-        /* SECCIÓN DE LOCALES HORIZONTALES TOTALMENTE OPERATIVOS */
+        /* SECCIÓN DE LOCALES COMPLETOS ABAJO */
         .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 14px; padding: 18px; margin-bottom: 16px; text-align: left; box-shadow: 0 6px 15px rgba(218,26,41,0.06); position: relative; overflow: hidden; }
         .card-emergency::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background-color: #DA1A29; }
         
@@ -90,37 +77,37 @@
         </div>
     </header>
 
-    <!-- CUADRÍCULA DE 8 CASILLAS SIMÉTRICAS COMPLETAS GENERADAS EXCLUSIVAMENTE CON FONDOS PROCEDURALES NATIVOS -->
+    <!-- CUADRÍCULA COMPLETA CON FOTOGRAFÍAS REALES ASOCIADAS -->
     <div class="categories-grid">
-        <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-grid-item art-todo active-item">
+        <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-grid-item img-real-todo active-item">
             <div class="cat-overlay"></div>
             <div class="cat-label-text">Ver Todo</div>
         </button>
-        <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-grid-item art-rest">
+        <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-grid-item img-real-rest">
             <div class="cat-overlay"></div>
             <div class="cat-label-text">Restaurantes</div>
         </button>
-        <button onclick="executeCategoryFilter('turismo', this)" class="cat-grid-item art-cab">
+        <button onclick="executeCategoryFilter('turismo', this)" class="cat-grid-item img-real-cab">
             <div class="cat-overlay"></div>
             <div class="cat-label-text">Cabañas</div>
         </button>
-        <button onclick="executeCategoryFilter('vinos', this)" class="cat-grid-item art-vin">
+        <button onclick="executeCategoryFilter('vinos', this)" class="cat-grid-item img-real-vin">
             <div class="cat-overlay"></div>
             <div class="cat-label-text">Viñedos</div>
         </button>
-        <button onclick="executeCategoryFilter('delivery', this)" class="cat-grid-item art-del">
+        <button onclick="executeCategoryFilter('delivery', this)" class="cat-grid-item img-real-del">
             <div class="cat-overlay"></div>
             <div class="cat-label-text">Delivery</div>
         </button>
-        <button onclick="executeCategoryFilter('servicios', this)" class="cat-grid-item art-serv">
+        <button onclick="executeCategoryFilter('servicios', this)" class="cat-grid-item img-real-serv">
             <div class="cat-overlay"></div>
             <div class="cat-label-text">Turnos 24/7</div>
         </button>
-        <button onclick="executeCategoryFilter('turismo-act', this)" class="cat-grid-item art-tur">
+        <button onclick="executeCategoryFilter('turismo-act', this)" class="cat-grid-item img-real-tur">
             <div class="cat-overlay"></div>
             <div class="cat-label-text">Turismo</div>
         </button>
-        <button onclick="resetSearch()" class="cat-grid-item art-mas">
+        <button onclick="resetSearch()" class="cat-grid-item img-real-mas">
             <div class="cat-overlay"></div>
             <div class="cat-label-text">Más filtros</div>
         </button>
@@ -138,3 +125,14 @@
                     <option value="3">$$$</option>
                 </select>
             </div>
+            <span id="counter-label" style="color: #64748B; font-size: 12px; font-weight: bold;">Locales listados</span>
+        </div>
+    </div>
+
+    <!-- LIENZO DE DIRECTORIO RESTAURADO ABAJO -->
+    <main id="directory-target"></main>
+
+    <script>
+        var searchCriteria = { text: '', price: 'todos', category: 'todos' };
+
+        var database = [
