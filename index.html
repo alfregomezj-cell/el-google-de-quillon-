@@ -38,7 +38,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="min-h-screen text-[#111212]">
+<body class="min-h-screen text-[#111212] bg-[#F5F5F5]">
 
     <!-- ARCHITECTURE MOTOR LOGÍSTICO (SPA ENGINE CON BASE DE DATOS INYECTADA) -->
     <script>
@@ -54,7 +54,7 @@
             {
                 id: 1,
                 nombre: "Complejo Turístico Laguna Esmeralda",
-                categoria: "turisco",
+                categoria: "turismo",
                 subcat: "Cabañas con Guardia y Cámaras",
                 rating: 4.8,
                 opinionesCount: 142,
@@ -159,6 +159,7 @@
 
         function filterAndRender() {
             const container = document.getElementById('main-directory-render');
+            if(!container) return;
             container.innerHTML = '';
 
             const filtered = database.filter(item => {
@@ -173,7 +174,8 @@
 
             filtered.sort((a, b) => (b.emergencia - a.emergencia) || (b.premium - a.premium));
 
-            document.getElementById('global-counter').innerText = `${filtered.length} locales listados en la comuna`;
+            const counterEl = document.getElementById('global-counter');
+            if(counterEl) counterEl.innerText = `${filtered.length} locales listados en la comuna`;
 
             if (filtered.length === 0) {
                 container.innerHTML = `
@@ -198,4 +200,3 @@
                                 </div>
                                 <div>
                                     <span class="bg-[#DA1A29] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-widest shadow-sm">Turno de Emergencia Destacado</span>
-                                    <h3 class="text-xl font-black text-[#111212] mt-1 tracking-tight">${item.nombre}</h3>
