@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quillón en Línea - Directorio Comercial Monopolizado</title>
+    <!-- Tailwind CSS v4 para procesamiento gráfico de alta fidelidad corporativa -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- Vectorización de Iconos Profesionales (FontAwesome 6) -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <script>
+        window.tailwindConfig = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Open Sans', 'sans-serif'] },
+                    colors: {
+                        yelp: {
+                            red: '#DA1A29',
+                            hoverRed: '#B2121E',
+                            dark: '#111212',
+                            grayBg: '#F5F5F5',
+                            border: '#E7E7E7',
+                            textGray: '#6E7072',
+                            starGold: '#F15C22',
+                            blueLink: '#0073BB'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Open Sans', sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; -webkit-font-smoothing: antialiased; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .fade-in { animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="min-h-screen text-[#111212]">
+
+    <!-- ARCHITECTURE MOTOR LOGÍSTICO (SPA ENGINE CON BASE DE DATOS INYECTADA) -->
+    <script>
+        const appState = {
+            cat: 'todos',
+            search: '',
+            precio: 'todos',
+            abiertoOnly: false,
+            activeMap: { name: 'Centro de la Comuna', lat: -36.7441, lng: -72.4764 }
+        };
+
+        const database = [
+            {
+                id: 1,
+                nombre: "Complejo Turístico Laguna Esmeralda",
+                categoria: "turisco",
+                subcat: "Cabañas con Guardia y Cámaras",
+                rating: 4.8,
+                opinionesCount: 142,
+                precio: 3,
+                direccion: "Av. Circunvalación #1820, sector Laguna",
+                telefono: "+56911112222",
+                abierto: true,
+                premium: true,
+                emergencia: false,
+                tags: ["Piscina", "Seguridad 24/7", "Cámaras", "Vista al Lago"],
+                infoAdicional: ["Cabañas Equipadas: $55.000 CLP / Noche", "Zonas de Camping con Guardias"],
+                coords: { lat: -36.7412, lng: -72.4789 },
+                reviews: { usuario: "Carlos M. (Concepción)", texto: "Excelente seguridad. Viajé con mi familia el fin de semana y las cámaras dan total tranquilidad. Muy recomendado.", estrellas: 5 }
+            },
+            {
+                id: 2,
+                nombre: "Parrilladas y Carnes El Fuego Criollo",
+                categoria: "gastronomia",
+                subcat: "Parrilladas y Comida Rápida",
+                rating: 4.6,
+                opinionesCount: 89,
+                precio: 2,
+                direccion: "Bernardo O'Higgins #720, Quillón Urbano",
+                telefono: "+56933334444",
+                abierto: true,
+                premium: true,
+                emergencia: false,
+                tags: ["Delivery", "Consumo en Local", "Vinos de la Zona", "Terraza"],
+                infoAdicional: ["Parrillada Premium: $28.000 CLP", "Menú Diario desde: $6.000 CLP"],
+                coords: { lat: -36.7445, lng: -72.4755 },
+                reviews: { usuario: "Pedro S.", texto: "El mejor lomo que he comido en la zona. El reparto a las cabañas llegó caliente.", estrellas: 5 }
+            },
+            {
+                id: 3,
+                nombre: "Vulcanización y Asistencia Central 24/7",
+                categoria: "servicios",
+                subcat: "Vulcanizaciones 24/7",
+                rating: 4.9,
+                opinionesCount: 64,
+                precio: 2,
+                direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)",
+                telefono: "+56955556666",
+                abierto: true,
+                premium: true,
+                emergencia: true,
+                tags: ["Atención Domingo", "Servicio en Ruta", "Fines de Semana"],
+                infoAdicional: ["Atención Inmediata", "Despacho de Grúa en la comuna"],
+                coords: { lat: -36.7210, lng: -72.4912 },
+                reviews: { usuario: "Juan K.", texto: "Me salvaron un domingo en la madrugada. Llegaron rápido a la ruta.", estrellas: 5 }
+            },
+            {
+                id: 4,
+                nombre: "Viña Ancestral Los Valles Ocultos",
+                categoria: "turismo",
+                subcat: "Viñas abiertas hoy",
+                rating: 4.7,
+                opinionesCount: 37,
+                precio: 3,
+                direccion: "Camino Cerro Negro, Km 4.5",
+                telefono: "+56977778888",
+                abierto: false,
+                premium: true,
+                emergencia: false,
+                tags: ["Catas Guiadas", "Turismo Invierno", "Venta de Cepa País"],
+                infoAdicional: ["Tour con Enólogo: $15.000 CLP", "Abierto de Lunes a Sábado"],
+                coords: { lat: -36.7522, lng: -72.4631 },
+                reviews: { usuario: "Marta R.", texto: "Muy buena la cata de vinos.", estrellas: 4 }
+            },
+            {
+                id: 5,
+                nombre: "Panadería y Pastelería Delicias del Pueblo",
+                categoria: "gastronomia",
+                subcat: "Pastelerías",
+                rating: 4.1,
+                opinionesCount: 4,
+                precio: 1,
+                direccion: "Vicente Méndez #140",
+                telefono: "",
+                abierto: true,
+                premium: false,
+                emergencia: false,
+                tags: ["Local Físico"],
+                infoAdicional: [],
+                coords: { lat: -36.7431, lng: -72.4761 },
+                reviews: { usuario: "Anonimo", texto: "Buen pan.", estrellas: 4 }
+            }
+        ];
+
+        function generateStars(rating) {
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) {
+                    html += `<i class="fas fa-star text-[#F15C22] mr-0.5"></i>`;
+                } else if (i - 0.5 <= rating) {
+                    html += `<i class="fas fa-star-half-alt text-[#F15C22] mr-0.5"></i>`;
+                } else {
+                    html += `<i class="far fa-star text-[#E7E7E7] mr-0.5"></i>`;
+                }
+            }
+            return html;
+        }
+
+        function filterAndRender() {
+            const container = document.getElementById('main-directory-render');
+            container.innerHTML = '';
+
+            const filtered = database.filter(item => {
+                const matchCat = appState.cat === 'todos' || item.categoria === appState.cat;
+                const matchSearch = item.nombre.toLowerCase().includes(appState.search.toLowerCase()) || 
+                                    item.tags.some(t => t.toLowerCase().includes(appState.search.toLowerCase())) ||
+                                    item.subcat.toLowerCase().includes(appState.search.toLowerCase());
+                const matchPrice = appState.precio === 'todos' || item.precio === parseInt(appState.precio);
+                const matchOpen = !appState.abiertoOnly || item.abierto;
+                return matchCat && matchSearch && matchPrice && matchOpen;
+            });
+
+            filtered.sort((a, b) => (b.emergencia - a.emergencia) || (b.premium - a.premium));
+
+            document.getElementById('global-counter').innerText = `${filtered.length} locales listados en la comuna`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-20 bg-white border border-[#E7E7E7] rounded-xl fade-in">
+                        <i class="fas fa-map-marked text-5xl text-gray-300 mb-4 animate-pulse"></i>
+                        <p class="text-[#6E7072] font-extrabold text-lg">Sin coincidencias para los criterios aplicados en Quillón.</p>
+                        <button onclick="resetAllFilters()" class="mt-3 text-xs font-bold text-[#0073BB] hover:underline bg-transparent border-none cursor-pointer">Limpiar filtros avanzados</button>
+                    </div>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const priceIndicator = "$".repeat(item.precio);
+                let elementHtml = '';
+
+                if (item.emergencia) {
+                    elementHtml = `
+                        <div class="bg-red-50 border-2 border-[#DA1A29] rounded-2xl p-6 mb-5 shadow-md flex flex-col md:flex-row justify-between items-center gap-4 fade-in">
+                            <div class="flex items-center gap-4 w-full">
+                                <div class="bg-[#DA1A29] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shrink-0 shadow-lg">
+                                    <i class="fas fa-phone-alt animate-pulse"></i>
+                                </div>
+                                <div>
+                                    <span class="bg-[#DA1A29] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-widest shadow-sm">Turno de Emergencia Destacado</span>
+                                    <h3 class="text-xl font-black text-[#111212] mt-1 tracking-tight">${item.nombre}</h3>
