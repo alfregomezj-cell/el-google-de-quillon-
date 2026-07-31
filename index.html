@@ -4,50 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea</title>
+    <!-- Cargamos la librería oficial de iconos corporativos que usa Yelp para que se vean profesionales -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     <style>
-        /* ESTILOS NATIVOS FIJOS - INTERFAZ INTEGRAL ESTILO YELP MÓVIL */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; padding: 0; }
+        /* ESTILOS NATIVOS FIJOS - FIEL AL ENTORNO DE YELP MOBILE */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #FFFFFF; color: #111212; margin: 0; padding: 0; }
         
-        /* CABECERA CON MARCA TEXTUAL LIMPIA Y BUSCADOR */
-        header { background-color: #FFFFFF; border-bottom: 1px solid #E7E7E7; padding: 16px; text-align: center; }
+        /* CABECERA Y MARCA */
+        header { background-color: #FFFFFF; padding: 12px 16px; text-align: center; }
         .logo-text { font-size: 24px; font-weight: 800; tracking-tight: -0.02em; margin: 0; }
         .logo-text span { color: #DA1A29; }
-        .logo-sub { font-size: 10px; color: #6E7072; font-weight: bold; text-transform: uppercase; margin: 4px 0 14px 0; letter-spacing: 0.05em; }
+        .logo-sub { font-size: 10px; color: #6E7072; font-weight: bold; text-transform: uppercase; margin: 4px 0 12px 0; letter-spacing: 0.05em; }
         
-        /* BARRA DE BÚSQUEDA COMPACTA */
+        /* BARRA DE BÚSQUEDA CORP EXPANDIDA */
         .search-wrapper { max-width: 500px; margin: 0 auto; display: flex; border: 1px solid #A3A3A3; border-radius: 6px; overflow: hidden; background-color: #FFFFFF; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); }
-        .search-wrapper input { width: 100%; padding: 10px 12px; font-size: 13px; border: none; outline: none; background: #FFFFFF; color: #111212; font-weight: 500; }
-        .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 16px; font-weight: bold; font-size: 13px; cursor: pointer; }
+        .search-wrapper input { width: 100%; padding: 12px; font-size: 14px; border: none; outline: none; background: #FFFFFF; color: #111212; font-weight: 500; }
+        .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 20px; font-weight: bold; font-size: 14px; cursor: pointer; }
         
-        /* BOTONERA DE CATEGORÍAS PROFESIONALES DE LA COMUNA */
-        .categories-panel { max-width: 600px; margin: 16px auto 0 auto; background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .cat-box-item { display: flex; flex-direction: column; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 8px; transition: background 0.2s; font-family: inherit; }
-        .cat-box-item:hover { background-color: #F5F5F5; }
-        .cat-box-item.active-item { background-color: #FFF2F3; border: 1px solid #FFF2F3; }
-        .cat-icon-svg { width: 34px; height: 34px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; }
-        .cat-label-text { font-size: 10px; font-weight: 700; color: #4A4A4A; text-align: center; }
-        .cat-box-item.active-item .cat-label-text { color: #DA1A29; }
+        /* CUADRÍCULA DE CATEGORÍAS (CLON EXACTO DE LA FOTO DE YELP) */
+        .categories-grid { max-width: 500px; margin: 16px auto; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #E7E7E7; border-left: 1px solid #E7E7E7; background-color: #FFFFFF; }
+        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; border-right: 1px solid #E7E7E7; border-bottom: 1px solid #E7E7E7; padding: 14px 4px; cursor: pointer; text-decoration: none; transition: background 0.15s; font-family: inherit; }
+        .cat-grid-item:hover { background-color: #F8F8F8; }
+        .cat-grid-item.active-item { background-color: #FFF2F3; }
         
-        /* FILTROS SECUNDARIOS DE COSTO */
-        .filter-row { max-width: 600px; margin: 16px auto 0 auto; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: #4A4A4A; }
-        .filter-select { background-color: #F8F8F8; border: 1px solid #CCCCCC; border-radius: 4px; padding: 6px; font-weight: bold; cursor: pointer; outline: none; }
+        /* ICONOS ESTILIZADOS EN ROJO Y GRIS COMO LA CAPTURA */
+        .cat-icon-wrap { font-size: 20px; color: #6E7072; margin-bottom: 6px; height: 24px; display: flex; align-items: center; justify-content: center; }
+        .cat-grid-item:hover .cat-icon-wrap, .cat-grid-item.active-item .cat-icon-wrap { color: #DA1A29; }
+        .cat-label-text { font-size: 11px; font-weight: 500; color: #4A4A4A; text-align: center; line-height: 1.2; }
+        .cat-grid-item.active-item .cat-label-text { color: #DA1A29; font-weight: 700; }
         
-        main { max-width: 600px; margin: 0 auto; padding: 16px; }
+        /* FILTROS SECUNDARIOS */
+        .filter-section-wrapper { background-color: #F5F5F5; border-top: 1px solid #E7E7E7; padding: 12px 16px; }
+        .filter-row { max-width: 500px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: #4A4A4A; }
+        .filter-select { background-color: #FFFFFF; border: 1px solid #CCCCCC; border-radius: 6px; padding: 6px 10px; font-weight: bold; cursor: pointer; outline: none; }
         
-        /* TARJETA DE EMERGENCIAS */
-        .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+        main { max-width: 500px; margin: 0 auto; padding: 16px; }
         
-        /* ESTRUCTURA HORIZONTAL VERDADERA MÓVIL */
+        /* SECCIÓN DE ALERTAS DE TURNO CRÍTICO abajo de la botonera */
+        .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: left; }
+        
+        /* CONTENEDOR PREMIUM HORIZONTAL (FOTO IZQUIERDA, TEXTO DERECHA) */
         .card-premium { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; gap: 14px; text-align: left; }
-        .card-photo-box { width: 85px; height: 85px; background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%); border: 1px solid #D1D5DB; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .card-photo-box { width: 90px; height: 90px; background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%); border: 1px solid #D1D5DB; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #6E7072; }
         .card-body { flex: 1; min-width: 0; }
         
-        /* TIPOGRAFÍAS DE ALTA DENSIDAD */
-        .biz-title { margin: 0; font-size: 15px; font-weight: 700; color: #111212; line-height: 1.2; }
-        .stars { color: #F15C22; font-weight: bold; font-size: 13px; }
-        .meta-line { font-size: 11px; color: #6E7072; margin-top: 2px; }
-        .address { font-size: 11px; color: #6E7072; margin: 4px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .review-box { margin-top: 8px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 8px 10px; border-radius: 6px; font-size: 11px; color: #4A4A4A; line-height: 1.3; }
+        /* TIPOGRAFÍAS Y DISEÑO DE ALTA DENSIDAD YELP */
+        .biz-title { margin: 0; font-size: 16px; font-weight: 700; color: #111212; line-height: 1.2; }
+        .stars-row { display: flex; align-items: center; gap: 4px; margin-top: 4px; font-size: 12px; }
+        .stars-vector { color: #F15C22; font-size: 12px; letter-spacing: -1px; }
+        .meta-line { font-size: 12px; color: #6E7072; margin-top: 2px; }
+        .address { font-size: 12px; color: #6E7072; margin: 4px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .review-box { margin-top: 8px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 8px 10px; border-radius: 6px; font-size: 12px; color: #4A4A4A; line-height: 1.35; }
     </style>
 </head>
 <body>
@@ -59,96 +66,73 @@
         </div>
         <div class="logo-sub">El Google de la Comuna</div>
         
+        <!-- Buscador integrado -->
         <div class="search-wrapper">
-            <input id="search-input" type="text" placeholder="Buscar por palabra clave (Ej. cabañas, carne)...">
+            <input id="search-input" type="text" placeholder="e.g. cabañas, parrilladas, vulcanización...">
             <button onclick="executeSearch()">Buscar</button>
         </div>
     </header>
 
-    <!-- PANEL DE ICONOS PROFESIONALES ENFOCADOS EN QUILLÓN -->
-    <div class="categories-panel">
-        <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-box-item active-item">
-            <div class="cat-icon-svg">🌐</div>
+    <!-- CUADRÍCULA DE NAVEGACIÓN PROFESIONAL DE 2 FILAS CONECTADAS (ESTILO YELP) -->
+    <div class="categories-grid">
+        <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-grid-item active-item">
+            <div class="cat-icon-wrap"><i class="fas fa-border-all"></i></div>
             <div class="cat-label-text">Ver Todo</div>
         </button>
-        <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-box-item">
-            <div class="cat-icon-svg">🍴</div>
+        <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-grid-item">
+            <div class="cat-icon-wrap"><i class="fas fa-utensils"></i></div>
             <div class="cat-label-text">Restaurantes</div>
         </button>
-        <button onclick="executeCategoryFilter('turismo', this)" class="cat-box-item">
-            <div class="cat-icon-svg">🏡</div>
-            <div class="cat-label-text">Cabañas y Vino</div>
+        <button onclick="executeCategoryFilter('turismo', this)" class="cat-grid-item">
+            <div class="cat-icon-wrap"><i class="fas fa-campground"></i></div>
+            <div class="cat-label-text">Cabañas</div>
         </button>
-        <button onclick="executeCategoryFilter('servicios', this)" class="cat-box-item">
-            <div class="cat-icon-svg">🛠️</div>
+        <button onclick="executeCategoryFilter('vinos', this)" class="cat-grid-item">
+            <div class="cat-icon-wrap"><i class="fas fa-wine-glass-alt"></i></div>
+            <div class="cat-label-text">Viñedos</div>
+        </button>
+        <button onclick="executeCategoryFilter('delivery', this)" class="cat-grid-item">
+            <div class="cat-icon-wrap"><i class="fas fa-motorcycle"></i></div>
+            <div class="cat-label-text">Delivery</div>
+        </button>
+        <button onclick="executeCategoryFilter('servicios', this)" class="cat-grid-item">
+            <div class="cat-icon-wrap"><i class="fas fa-wrench"></i></div>
             <div class="cat-label-text">Servicios 24/7</div>
         </button>
+        <button onclick="executeCategoryFilter('turismo-act', this)" class="cat-grid-item">
+            <div class="cat-icon-wrap"><i class="fas fa-map-marked-alt"></i></div>
+            <div class="cat-label-text">Turismo</div>
+        </button>
+        <button onclick="resetSearch()" class="cat-grid-item">
+            <div class="cat-icon-wrap"><i class="fas fa-ellipsis-h"></i></div>
+            <div class="cat-label-text">Más opciones</div>
+        </button>
     </div>
 
-    <!-- BARRA DE CONTROLES DE COSTO -->
-    <div class="filter-row">
-        <div>
-            <span>Costo: </span>
-            <select id="price-select" onchange="executePriceFilter(this)" class="filter-select">
-                <option value="todos">Todos</option>
-                <option value="1">$</option>
-                <option value="2">$$</option>
-                <option value="3">$$$</option>
-            </select>
+    <!-- FILTROS DE COSTO ADAPTADOS CON FONDO GRIS YELP -->
+    <div class="filter-section-wrapper">
+        <div class="filter-row">
+            <div>
+                <span>Filtrar por Costo: </span>
+                <select id="price-select" onchange="executePriceFilter(this)" class="filter-select">
+                    <option value="todos">Todos</option>
+                    <option value="1">$</option>
+                    <option value="2">$$</option>
+                    <option value="3">$$$</option>
+                </select>
+            </div>
+            <span id="counter-label" style="color: #6E7072; font-size: 12px; font-weight: bold;">Locales listados</span>
         </div>
-        <span id="counter-label" style="color: #9B9B9B; font-size: 11px; font-weight: bold;">Locales listados</span>
     </div>
 
-    <!-- LIENZO PRINCIPAL -->
+    <!-- LIENZO PRINCIPAL CON EL DIRECTO COMPLETO RESTAURADO -->
     <main id="directory-target"></main>
 
-    <!-- MOTOR INTERNO LOGÍSTICO COMPACTO -->
+    <!-- MOTOR LOGÍSTICO INTERNO -->
     <script>
         var searchCriteria = { text: '', price: 'todos', category: 'todos' };
 
         var database = [
             { id: 1, nombre: "Vulcanización y Asistencia Central Artificial", categoria: "servicios", subcat: "Vulcanizaciones 24/7", icon: "🛠️", rating: "★★★★★", opiniones: 64, precio: "2", direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)", text: "Me salvaron un domingo en la madrugada en la ruta.", emergencia: true },
             { id: 2, nombre: "Complejo Turístico Laguna Esmeralda Artificial", categoria: "turismo", subcat: "Cabañas con Guardia y Cámaras", icon: "🏠", rating: "★★★★★", opiniones: 142, precio: "3", direccion: "Av. Circunvalación #1820, sector Laguna", text: "Excelente seguridad, las cámaras dan total tranquilidad.", emergencia: false },
-            { id: 3, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", categoria: "gastronomia", subcat: "Parrilladas y Comida Rápida", icon: "🥩", rating: "★★★★☆", opiniones: 89, precio: "2", direccion: "Bernardo O'Higgins #720, Quillón Urbano", text: "El reparto a las cabañas llegó caliente y sabroso.", emergencia: false }
-        ];
-
-        function render() {
-            var container = document.getElementById('directory-target');
-            if (!container) return;
-            container.innerHTML = '';
-
-            var filtered = [];
-            for (var i = 0; i < database.length; i++) {
-                var item = database[i];
-                
-                var matchSearch = item.nombre.toLowerCase().indexOf(searchCriteria.text.toLowerCase()) !== -1 || 
-                                  item.subcat.toLowerCase().indexOf(searchCriteria.text.toLowerCase()) !== -1;
-                var matchPrice = searchCriteria.price === 'todos' || item.precio === searchCriteria.price;
-                var matchCategory = searchCriteria.category === 'todos' || item.categoria === searchCriteria.category;
-
-                if (matchSearch && matchPrice && matchCategory) {
-                    filtered.push(item);
-                }
-            }
-
-            filtered.sort(function(a, b) { return b.emergencia - a.emergencia; });
-            document.getElementById('counter-label').innerText = filtered.length + " locales listados";
-
-            if (filtered.length === 0) {
-                container.innerHTML = '<p style="text-align:center; font-weight:bold; color:gray; padding:20px;">Sin resultados para los filtros seleccionados.</p>';
-                return;
-            }
-
-            for (var j = 0; j < filtered.length; j++) {
-                var it = filtered[j];
-                var html = '';
-                var priceSymbols = it.precio === "1" ? "$" : (it.precio === "2" ? "$$" : "$$$");
-
-                if (it.emergencia) {
-                    html = `
-                        <div class="card-emergency">
-                            <span style="background-color: #DA1A29; color: white; font-size: 9px; font-weight: bold; padding: 2px 6px; border-radius: 3px;">⚠️ TURNO 24/7</span>
-                            <h3 style="margin: 6px 0 2px 0; font-size: 16px;">` + it.nombre + `</h3>
-                            <p style="margin: 0; color: #DA1A29; font-size: 12px; font-weight: bold;">` + it.subcat + `</p>
-                            <p class="address">📍 ` + it.direccion + `</p>
-                        </div>`;
+            { id: 3, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", categoria: "gastronomia", subcat: "Parrilladas y Comida Rápida", icon: "🥩", rating: "★★★★☆", opiniones: 89, precio: "2", direccion: "Bernardo O'Higgins #720, Quillón Urbano", text: "El reparto a las cabañas llegó caliente y sabroso.", emergencia: false },
