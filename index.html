@@ -12,7 +12,7 @@
         header { background-color: #FFFFFF; border-bottom: 1px solid #E7E7E7; padding: 12px 16px; position: sticky; top: 0; z-index: 50; }
         .header-wrap { max-width: 1024px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         @media (min-width: 640px) { .header-wrap { flex-direction: row; justify-content: space-between; } }
-        .logo-group { display: flex; align-items: center; gap: 10px; }
+        .logo-group { display: flex; align-items: center; gap: 10px; cursor: pointer; }
         .logo-badge { background-color: #DA1A29; color: #FFFFFF; width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; }
         .logo-text { font-size: 18px; font-weight: 800; }
         .logo-text span { color: #DA1A29; }
@@ -43,14 +43,15 @@
         .badge-premium { position: absolute; top: 0; right: 0; background-color: #F15C22; color: #FFFFFF; font-size: 9px; font-weight: bold; padding: 3px 8px; border-radius: 0 11px 0 8px; }
         .stars { color: #F15C22; font-weight: bold; }
         .link-reviews { color: #0073BB; cursor: pointer; text-decoration: underline; font-size: 12px; }
-        .review-snippet { margin-top: 10px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 10px; border-radius: 6px; font-size: 12px; color: #4A4A4A; }
+        .review-snippet { margin-top: 10px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 10px; border-radius: 6px; font-size: 12px; color: #4A4A4A; cursor: pointer; }
         .btn-action { display: inline-block; background-color: #DA1A29; color: #FFFFFF; text-decoration: none; padding: 8px 14px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-top: 10px; }
-        .btn-map { background-color: #FFFFFF; border: 1px solid #CCCCCC; padding: 7px 14px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-left: 4px; }
+        .btn-premium-map { background-color: #FFFFFF; border: 1px solid #CCCCCC; padding: 7px 14px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-left: 4px; }
         .item-basic { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 8px; padding: 12px; margin-top: 8px; opacity: 0.8; display: flex; justify-content: space-between; }
         
         /* PANEL LATERAL Y SUBMENÚS DETALLADOS */
         .sidebar { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); height: fit-content; }
         .map-placeholder { height: 180px; background-color: #E5E7EB; border-radius: 6px; margin-top: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; font-size: 12px; color: #6E7072; font-weight: bold; }
+        .btn-gps-route { margin-top: 12px; display: inline-block; background-color: #0073BB; color: #FFFFFF; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 4px; text-decoration: none; }
         .btn-add-local { width: 100%; background-color: #111212; color: #FFFFFF; border: none; padding: 10px; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; }
         
         /* FORMULARIO CASILLAS INTERNAS */
@@ -85,9 +86,7 @@
 
     <div class="main-layout">
         
-        <!-- COLUMNA CENTRAL: VISTAS ASÍNCRONAS SPA -->
         <div class="content-area">
-            
             <!-- VISTA 1: HOME LISTADOS -->
             <div id="view-home" class="view-panel active-view">
                 <div class="filter-row">
@@ -130,6 +129,3 @@
                             <select id="f-cat">
                                 <option value="gastronomia">Gastronomía</option>
                                 <option value="servicios">Servicios y Turnos</option>
-                                <option value="turismo">Turismo y Vino</option>
-                            </select>
-                        </div>
