@@ -5,59 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea</title>
     <style>
-        /* ESTILOS NATIVOS FIJOS - FIEL AL ENTORNO DE YELP MOBILE */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #FFFFFF; color: #111212; margin: 0; padding: 0; }
+        /* CORE DE INGENIERÍA VISUAL - ALTA VITALIDAD CORPORATIVA */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #F8FAFC; color: #0F172A; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
-        /* CABECERA Y MARCA */
-        header { background-color: #FFFFFF; padding: 12px 16px; text-align: center; }
-        .logo-text { font-size: 24px; font-weight: 800; tracking-tight: -0.02em; margin: 0; }
-        .logo-text span { color: #DA1A29; }
-        .logo-sub { font-size: 10px; color: #6E7072; font-weight: bold; text-transform: uppercase; margin: 4px 0 12px 0; letter-spacing: 0.05em; }
+        /* CABECERA VIBRANTE CON EFECTO DE FONDO */
+        header { background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%); border-bottom: 1px solid #F1F5F9; padding: 20px 16px; text-align: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+        .logo-text { font-size: 26px; font-weight: 800; tracking-tight: -0.03em; margin: 0; color: #0F172A; }
+        .logo-text span { color: #DA1A29; position: relative; }
+        .logo-sub { font-size: 10px; color: #64748B; font-weight: 800; text-transform: uppercase; margin: 4px 0 16px 0; letter-spacing: 0.08em; }
         
-        /* BARRA DE BÚSQUEDA CORP EXPANDIDA */
-        .search-wrapper { max-width: 500px; margin: 0 auto; display: flex; border: 1px solid #A3A3A3; border-radius: 6px; overflow: hidden; background-color: #FFFFFF; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); }
-        .search-wrapper input { width: 100%; padding: 12px; font-size: 14px; border: none; outline: none; background: #FFFFFF; color: #111212; font-weight: 500; }
-        .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 20px; font-weight: bold; font-size: 14px; cursor: pointer; }
+        /* BARRA DE BÚSQUEDA INTERACTIVA MEJORADA */
+        .search-wrapper { max-width: 500px; margin: 0 auto; display: flex; border: 2px solid #E2E8F0; border-radius: 10px; overflow: hidden; background-color: #FFFFFF; box-shadow: 0 4px 12px rgba(15,23,42,0.04); transition: all 0.25s; }
+        .search-wrapper:focus-within { border-color: #DA1A29; box-shadow: 0 4px 20px rgba(218,26,41,0.1); }
+        .search-wrapper input { width: 100%; padding: 14px; font-size: 14px; border: none; outline: none; background: #FFFFFF; color: #0F172A; font-weight: 500; }
+        .search-wrapper button { background-color: #DA1A29; color: #FFFFFF; border: none; padding: 0 24px; font-weight: 800; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+        .search-wrapper button:hover { background-color: #B2121E; }
         
-        /* CUADRÍCULA DE CATEGORÍAS PROFESIONAL (ESTILO YELP REAL CON ICONOS SVG INTEGRADOS) */
-        .categories-grid { max-width: 500px; margin: 20px auto; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #E7E7E7; border-left: 1px solid #E7E7E7; background-color: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border-radius: 4px; overflow: hidden; }
-        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; border-right: 1px solid #E7E7E7; border-bottom: 1px solid #E7E7E7; padding: 16px 2px; cursor: pointer; text-decoration: none; transition: background 0.15s; font-family: inherit; }
-        .cat-grid-item:hover { background-color: #F8F8F8; }
-        .cat-grid-item.active-item { background-color: #FFF2F3; }
+        /* CUADRÍCULA DE NAVEGACIÓN COMPACTA CON ANIMACIÓN Y VIDA */
+        .categories-grid { max-width: 500px; margin: 20px auto; display: grid; grid-template-columns: repeat(4, 1fr); background-color: #FFFFFF; box-shadow: 0 10px 25px rgba(15,23,42,0.06); border-radius: 14px; overflow: hidden; border: 1px solid #E2E8F0; }
+        .cat-grid-item { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; border-right: 1px solid #F1F5F9; border-bottom: 1px solid #F1F5F9; padding: 18px 2px; cursor: pointer; text-decoration: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-family: inherit; }
+        .cat-grid-item:active { transform: scale(0.95); background-color: #F8FAFC; }
         
-        /* CONTENEDOR DE ICONOS NATIVOS SVG */
-        .cat-icon-wrap { width: 26px; height: 26px; fill: #6E7072; color: #6E7072; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; }
-        .cat-grid-item:hover .cat-icon-wrap, .cat-grid-item.active-item .cat-icon-wrap { fill: #DA1A29; color: #DA1A29; }
-        .cat-label-text { font-size: 11px; font-weight: 600; color: #4A4A4A; text-align: center; line-height: 1.2; }
-        .cat-grid-item.active-item .cat-label-text { color: #DA1A29; font-weight: 700; }
+        /* COLORES IDENTITARIOS ASIGNADOS A CADA ICONO SVG */
+        .cat-icon-wrap { width: 28px; height: 26px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+        .cat-grid-item:hover .cat-icon-wrap { transform: translateY(-2px); }
         
-        /* FILTROS SECUNDARIOS */
-        .filter-section-wrapper { background-color: #F5F5F5; border-top: 1px solid #E7E7E7; padding: 12px 16px; }
-        .filter-row { max-width: 500px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: #4A4A4A; }
-        .filter-select { background-color: #FFFFFF; border: 1px solid #CCCCCC; border-radius: 6px; padding: 6px 10px; font-weight: bold; cursor: pointer; outline: none; }
+        /* Paleta cromática por sector */
+        .color-todo { fill: #6366F1; color: #6366F1; }
+        .color-rest { fill: #EA580C; color: #EA580C; }
+        .color-cab { fill: #0EA5E9; color: #0EA5E9; }
+        .color-vin { fill: #8B5CF6; color: #8B5CF6; }
+        .color-del { fill: #10B981; color: #10B981; }
+        .color-serv { fill: #EF4444; color: #EF4444; }
+        .color-tur { fill: #F59E0B; color: #F59E0B; }
+        .color-mas { fill: #64748B; color: #64748B; }
+        
+        /* Estado seleccionado dinámico estilo Yelp */
+        .cat-grid-item.active-item { background: linear-gradient(to bottom, #FFF2F3, #FFFFFF); }
+        .cat-grid-item.active-item .cat-icon-wrap { fill: #DA1A29 !important; color: #DA1A29 !important; transform: scale(1.1); }
+        .cat-label-text { font-size: 11px; font-weight: 700; color: #475569; text-align: center; line-height: 1.2; }
+        .cat-grid-item.active-item .cat-label-text { color: #DA1A29; font-weight: 800; }
+        
+        /* SECCIÓN DE FILTROS CROMÁTICA */
+        .filter-section-wrapper { background-color: #F1F5F9; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; padding: 14px 16px; }
+        .filter-row { max-width: 500px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: #334155; }
+        .filter-select { background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 8px 12px; font-weight: bold; cursor: pointer; outline: none; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: border 0.2s; }
+        .filter-select:focus { border-color: #DA1A29; }
         
         main { max-width: 500px; margin: 0 auto; padding: 16px; }
         
-        /* SECCIÓN DE ALERTAS DE TURNO CRÍTICO abajo de la botonera */
-        .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: left; }
+        /* PANEL DE CONTENIDO: DINAMISMO EN TARJETAS */
+        .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 14px; padding: 18px; margin-bottom: 16px; text-align: left; box-shadow: 0 6px 15px rgba(218,26,41,0.06); position: relative; overflow: hidden; }
+        .card-emergency::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background-color: #DA1A29; }
         
-        /* CONTENEDOR PREMIUM HORIZONTAL (FOTO IZQUIERDA, TEXTO DERECHA) */
-        .card-premium { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; gap: 14px; text-align: left; }
-        .card-photo-box { width: 90px; height: 90px; background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%); border: 1px solid #D1D5DB; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #6E7072; }
+        /* Tarjetas flotantes horizontales de alta fidelidad */
+        .card-premium { background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(15,23,42,0.03); display: flex; gap: 16px; text-align: left; transition: transform 0.2s, box-shadow 0.2s; }
+        .card-premium:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
+        .card-photo-box { width: 95px; height: 95px; background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%); border: 1px solid #E2E8F0; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
         .card-body { flex: 1; min-width: 0; }
         
-        /* TIPOGRAFÍAS Y DISEÑO DE ALTA DENSIDAD YELP */
-        .biz-title { margin: 0; font-size: 16px; font-weight: 700; color: #111212; line-height: 1.2; }
-        .stars-row { display: flex; align-items: center; gap: 4px; margin-top: 4px; font-size: 12px; }
-        .stars-vector { color: #F15C22; font-size: 12px; letter-spacing: -1px; }
-        .meta-line { font-size: 12px; color: #6E7072; margin-top: 2px; }
-        .address { font-size: 12px; color: #6E7072; margin: 4px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .review-box { margin-top: 8px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 8px 10px; border-radius: 6px; font-size: 12px; color: #4A4A4A; line-height: 1.35; }
+        /* TIPOGRAFÍAS DE ALTA DENSIDAD INTERACTIVA */
+        .biz-title { margin: 0; font-size: 16px; font-weight: 800; color: #0F172A; line-height: 1.25; }
+        .biz-title:hover { color: #DA1A29; cursor: pointer; }
+        .stars-row { display: flex; align-items: center; gap: 6px; margin-top: 5px; font-size: 12px; }
+        .stars-vector { color: #EA580C; font-size: 13px; letter-spacing: -1px; font-weight: 900; }
+        .meta-line { font-size: 12px; color: #64748B; font-weight: 600; margin-top: 2px; }
+        .address { font-size: 12px; color: #64748B; font-weight: 500; margin: 5px 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .review-box { margin-top: 10px; background-color: #F8FAFC; border: 1px solid #E2E8F0; padding: 10px 12px; border-radius: 8px; font-size: 12px; color: #334155; line-height: 1.4; border-left: 3px solid #CBD5E1; }
     </style>
 </head>
 <body>
 
-    <!-- CABECERA TEXTUAL LIMPIA -->
+    <!-- CABECERA TEXTUAL LIMPIA Y MODERNA -->
     <header>
         <div onclick="resetSearch()" style="cursor: pointer;">
             <h1 class="logo-text">Quillón<span>enLínea</span></h1>
@@ -71,67 +90,37 @@
         </div>
     </header>
 
-    <!-- CUADRÍCULA DE NAVEGACIÓN PROFESIONAL DE 2 FILAS CON ICONOS SVG INTEGRADOS (ESTILO YELP FIEL) -->
+    <!-- CUADRÍCULA DE NAVEGACIÓN CROMÁTICA VIBRANTE DE 2 FILAS CONECTADAS (ESTILO YELP) -->
     <div class="categories-grid">
         <button id="cat-btn-all" onclick="executeCategoryFilter('todos', this)" class="cat-grid-item active-item">
-            <div class="cat-icon-wrap">
+            <div class="cat-icon-wrap color-todo">
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 11h5V4H4v7zm0 9h5v-7H4v7zm7 0h5v-7h-5v7zm7 0h5v-7h-5v7zm-7-9h5V4h-5v7zm7-7v7h5V4h-5z"/></svg>
             </div>
             <div class="cat-label-text">Ver Todo</div>
         </button>
         <button onclick="executeCategoryFilter('gastronomia', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap">
+            <div class="cat-icon-wrap color-rest">
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8h2V2c-2.5 0-4.5 1.8-4.5 4z"/></svg>
             </div>
             <div class="cat-label-text">Restaurantes</div>
         </button>
         <button onclick="executeCategoryFilter('turismo', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap">
+            <div class="cat-icon-wrap color-cab">
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             </div>
             <div class="cat-label-text">Cabañas</div>
         </button>
         <button onclick="executeCategoryFilter('vinos', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap">
+            <div class="cat-icon-wrap color-vin">
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M5.67 5H18.33l-1 4H6.67l-1-4zM12 14.5c-2.48 0-4.5-2.02-4.5-4.5h9c0 2.48-2.02 4.5-4.5 4.5zM11 15v5H7v2h10v-2h-4v-5h-2z"/></svg>
             </div>
             <div class="cat-label-text">Viñedos</div>
         </button>
         <button onclick="executeCategoryFilter('delivery', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap">
+            <div class="cat-icon-wrap color-del">
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12.5-4.5H15V9.5h3.5l2 3.5h-2zM18 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
             </div>
             <div class="cat-label-text">Delivery</div>
         </button>
         <button onclick="executeCategoryFilter('servicios', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.3C.5 6.7.9 9.8 2.9 11.8c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.5z"/></svg>
-            </div>
-            <div class="cat-label-text">Servicios 24/7</div>
-        </button>
-        <button onclick="executeCategoryFilter('turismo-act', this)" class="cat-grid-item">
-            <div class="cat-icon-wrap">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48v15.26c0 .28.22.52.5.52l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.52-.5-.52zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
-            </div>
-            <div class="cat-label-text">Turismo</div>
-        </button>
-        <button onclick="resetSearch()" class="cat-grid-item">
-            <div class="cat-icon-wrap">
-                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-            </div>
-            <div class="cat-label-text">Más opciones</div>
-        </button>
-    </div>
-
-    <!-- FILTROS DE COSTO ADAPTADOS CON FONDO GRIS YELP -->
-    <div class="filter-section-wrapper">
-        <div class="filter-row">
-            <div>
-                <span>Filtrar por Costo: </span>
-                <select id="price-select" onchange="executePriceFilter(this)" class="filter-select">
-                    <option value="todos">Todos</option>
-                    <option value="1">$</option>
-                    <option value="2">$$</option>
-                    <option value="3">$$$</option>
-                </select>
-            </div>
+            <div class="cat-icon-wrap color-serv">
