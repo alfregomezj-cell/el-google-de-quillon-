@@ -27,10 +27,13 @@
         
         main { max-width: 600px; margin: 0 auto; padding: 16px; }
         
-        /* TARJETAS OPERATIVAS */
+        /* TARJETAS OPERATIVAS CON ALINEACIÓN HORIZONTAL */
         .card-emergency { background-color: #FFF5F5; border: 2px solid #DA1A29; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-        .card-premium { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; margin-bottom: 12px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .badge-premium { position: absolute; top: 0; right: 0; background-color: #F15C22; color: #FFFFFF; font-size: 9px; font-weight: bold; padding: 3px 8px; border-radius: 0 11px 0 8px; }
+        
+        /* Estructura horizontal limpia para los locales destacados */
+        .card-premium { background-color: #FFFFFF; border: 1px solid #E7E7E7; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: row; gap: 16px; align-items: flex-start; }
+        .card-body { flex: 1; }
+        
         .stars { color: #F15C22; font-weight: bold; font-size: 14px; }
         .address { font-size: 12px; color: #6E7072; margin: 4px 0 0 0; }
         .review-box { margin-top: 10px; background-color: #F8F8F8; border: 1px solid #E7E7E7; padding: 10px; border-radius: 6px; font-size: 12px; color: #4A4A4A; }
@@ -46,7 +49,6 @@
         </div>
         <div class="logo-sub">El Google de la Comuna</div>
         
-        <!-- Formulario estático de búsqueda -->
         <div class="search-wrapper">
             <input id="search-input" type="text" placeholder="Buscar por palabra clave (Ej. cabañas, carne)...">
             <button onclick="executeSearch()">Buscar</button>
@@ -121,18 +123,20 @@
                             <p class="address">📍 ` + it.direccion + `</p>
                         </div>`;
                 } else {
+                    // Diseño horizontal sin la palabra Premium
                     html = `
                         <div class="card-premium">
-                            <div class="badge-premium">👑 PREMIUM</div>
-                            <span style="font-size: 10px; color: gray; font-weight: bold; text-transform: uppercase;">` + it.subcat + `</span>
-                            <h3 style="margin: 2px 0 0 0; font-size: 16px;">` + it.nombre + `</h3>
-                            <div style="font-size: 12px; margin-top: 4px;">
-                                <span class="stars">` + it.rating + `</span> <span style="color: gray;">(` + it.opiniones + ` opiniones) • ` + priceSymbols + `</span>
-                            </div>
-                            <p class="address">📍 ` + it.direccion + `</p>
-                            <div class="review-box">
-                                <strong>Última opinión de turistas:</strong>
-                                "` + it.text + `"
+                            <div class="card-body">
+                                <span style="font-size: 10px; color: gray; font-weight: bold; text-transform: uppercase;">` + it.subcat + `</span>
+                                <h3 style="margin: 2px 0 0 0; font-size: 16px;">` + it.nombre + `</h3>
+                                <div style="font-size: 12px; margin-top: 4px;">
+                                    <span class="stars">` + it.rating + `</span> <span style="color: gray;">(` + it.opiniones + ` opiniones) • ` + priceSymbols + `</span>
+                                </div>
+                                <p class="address">📍 ` + it.direccion + `</p>
+                                <div class="review-box">
+                                    <strong>Última opinión de turistas:</strong>
+                                    "` + it.text + `"
+                                </div>
                             </div>
                         </div>`;
                 }
@@ -158,7 +162,6 @@
             render();
         }
 
-        // Ejecución base inicial
         render();
     </script>
 </body>
