@@ -4,27 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea - El Yelp de la Comuna</title>
-    <!-- Inyección del motor de diseño oficial -->
+    <!-- Inyección del motor de diseño oficial estable -->
     <script src="https://tailwindcss.com"></script>
     <style>
         body { font-family: sans-serif; background-color: #F5F5F5; color: #111212; margin: 0; }
         .badge-open { background-color: #F2F9F3; color: #107A32; }
         .badge-closed { background-color: #FFF2F3; color: #C9212D; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="bg-[#F5F5F5] min-h-screen text-[#111212]">
 
-    <!-- ENGINE DE DATOS INTERACTIVOS (JAVASCRIPT) -->
+    <!-- INTERFAZ VISUAL DE ALTA DENSIDAD CORPORATIVA (DOM) -->
+    <header class="bg-white border-b border-[#E7E7E7] sticky top-0 z-50 px-4 py-3.5 shadow-sm">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2.5 shrink-0 select-none">
+                <div class="bg-[#DA1A29] text-white w-9 h-9 rounded-lg flex items-center justify-center font-black text-xl tracking-tighter shadow-sm">Q!</div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-extrabold tracking-tight text-[#111212] leading-none">Quillón<span class="text-[#DA1A29]">enLínea</span></span>
+                    <span class="text-[9px] text-gray-400 font-extrabold tracking-wider uppercase mt-1">El Google de la Comuna</span>
+                </div>
+            </div>
+            <div class="flex w-full sm:max-w-md border border-gray-300 rounded-lg overflow-hidden bg-white shadow-inner focus-within:border-gray-400 transition-colors">
+                <input id="search-field" oninput="handleSearchInput(this.value)" type="text" placeholder="🔎 Buscar vulcanizaciones, cabañas, servicios..." class="w-full px-3 py-2 text-xs bg-white text-[#111212] font-medium focus:outline-none">
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-white border-b border-[#E7E7E7] px-4 shadow-sm overflow-x-auto sticky top-[65px] z-40">
+        <div class="max-w-6xl mx-auto flex gap-5 text-xs font-semibold">
+            <button onclick="setPrimaryCategory('todos', this)" class="tab-btn py-3 border-b-2 border-[#DA1A29] text-[#DA1A29] font-bold whitespace-nowrap focus:outline-none cursor-pointer">📦 Todo el Pueblo</button>
+            <button onclick="setPrimaryCategory('gastronomia', this)" class="tab-btn py-3 border-b-2 border-transparent text-gray-500 whitespace-nowrap focus:outline-none cursor-pointer">🍔 Gastronomía</button>
+            <button onclick="setPrimaryCategory('servicios', this)" class="tab-btn py-3 border-b-2 border-transparent text-gray-500 whitespace-nowrap focus:outline-none cursor-pointer">🛠️ Servicios y Turnos</button>
+            <button onclick="setPrimaryCategory('turismo', this)" class="tab-btn py-3 border-b-2 border-transparent text-gray-500 whitespace-nowrap focus:outline-none cursor-pointer">🍷 Turismo y Vino</button>
+        </div>
+    </div>
+
+    <main class="max-w-3xl mx-auto px-4 py-4">
+        <div class="bg-white border border-[#E7E7E7] rounded-xl p-3.5 mb-4 flex flex-wrap items-center justify-between gap-3 shadow-sm text-xs font-bold text-gray-700">
+            <div class="flex items-center gap-4 flex-wrap">
+                <div class="flex items-center gap-1.5">
+                    <label class="text-gray-400 font-semibold">Costo:</label>
+                    <select id="filter-price" onchange="setPriceFilter(this)" class="bg-gray-50 border border-[#E7E7E7] rounded-md px-2 py-0.5 font-bold text-gray-700 focus:outline-none cursor-pointer">
+                        <option value="todos">Todos</option>
+                        <option value="1">$</option>
+                        <option value="2">$$</option>
+                        <option value="3">$$$</option>
+                    </select>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <input type="checkbox" id="filter-open" onchange="toggleOpenState(this)" class="w-4 h-4 rounded accent-[#DA1A29] cursor-pointer">
+                    <label for="filter-open" class="text-gray-400 font-semibold cursor-pointer select-none">Abierto Ahora</label>
+                </div>
+            </div>
+            <span id="global-counter" class="font-extrabold text-gray-400 tracking-tight">Analizando listados...</span>
+        </div>
+
+        <!-- Contenedor donde se inyecta la base de datos de locales -->
+        <div id="main-directory-render" class="min-h-[400px]"></div>
+    </main>
+
+    <!-- ENGINE LOGÍSTICO Y BASE DE DATOS PROTEGIDA (AL FINAL DE LA PÁGINA) -->
     <script>
         const database = [
-            { id: 1, nombre: "Complejo Turístico Laguna Esmeralda Artificial", categoria: "turismo", subcat: "Cabañas con Guardia y Cámaras", rating: "⭐⭐⭐⭐⭐", opinionesCount: 142, precio: "$$$", direccion: "Av. Circunvalación #1820, sector Laguna", telefono: "+56911112222", abierto: true, premium: true, emergencia: false, tags: ["Piscina", "Seguridad 24/7", "Cámaras"], infoAdicional: "Cabañas Equipadas: $55.000 CLP / Noche", reviewTexto: "Excelente seguridad y las cámaras dan total tranquilidad." },
-            { id: 2, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", categoria: "gastronomia", subcat: "Parrilladas y Comida Rápida", rating: "⭐⭐⭐⭐", opinionesCount: 89, precio: "$$", direccion: "Bernardo O'Higgins #720, Quillón Urbano", telefono: "+56933334444", abierto: true, premium: true, emergencia: false, tags: ["Delivery", "Terraza", "Vinos"], infoAdicional: "Parrillada Premium: $28.000 CLP", reviewTexto: "El reparto a las cabañas llegó caliente." },
-            { id: 3, nombre: "Vulcanización y Asistencia Central 24/7 Artificial", categoria: "servicios", subcat: "Vulcanizaciones 24/7", rating: "⭐⭐⭐⭐⭐", opinionesCount: 64, precio: "$$", direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)", telefono: "+56955556666", abierto: true, premium: true, emergencia: true, tags: ["Atención Domingo", "Servicio en Ruta"], infoAdicional: "Atención Inmediata 24 Horas", reviewTexto: "Me salvaron un domingo en la madrugada." },
-            { id: 4, nombre: "Viña Ancestral Los Valles Ocultos Artificial", categoria: "turismo", subcat: "Viñas abiertas hoy", rating: "⭐⭐⭐⭐", opinionesCount: 37, precio: "$$$", direccion: "Camino Cerro Negro, Km 4.5", telefono: "+56977778888", abierto: false, premium: true, emergencia: false, tags: ["Catas Guiadas", "Turismo Invierno"], infoAdicional: "Tour con Enólogo: $15.000 CLP", reviewTexto: "Muy buena la cata de vinos." },
-            { id: 5, nombre: "Panadería y Pastelería Delicias del Pueblo Artificial", categoria: "gastronomia", subcat: "Pastelerías", rating: "⭐⭐⭐⭐", opinionesCount: 4, precio: "$", direccion: "Vicente Méndez #140", telefono: "", abierto: true, premium: false, emergencia: false, tags: ["Local Físico"], infoAdicional: "", reviewTexto: "Buen pan tradicional de la zona." }
+            { id: 1, nombre: "Complejo Turístico Laguna Esmeralda Artificial", categoria: "turismo", subcat: "Cabañas con Guardia y Cámaras", rating: "⭐⭐⭐⭐⭐", opinionesCount: 142, precio: 3, direccion: "Av. Circunvalación #1820, sector Laguna", telefono: "+56911112222", abierto: true, premium: true, emergencia: false, tags: ["Piscina", "Seguridad 24/7", "Cámaras"], infoAdicional: "Cabañas Equipadas: $55.000 CLP / Noche", reviewTexto: "Excelente seguridad y las cámaras dan total tranquilidad." },
+            { id: 2, nombre: "Parrilladas y Carnes El Fuego Criollo Artificial", categoria: "gastronomia", subcat: "Parrilladas y Comida Rápida", rating: "⭐⭐⭐⭐", opinionesCount: 89, precio: 2, direccion: "Bernardo O'Higgins #720, Quillón Urbano", telefono: "+56933334444", abierto: true, premium: true, emergencia: false, tags: ["Delivery", "Terraza", "Vinos"], infoAdicional: "Parrillada Premium: $28.000 CLP", reviewTexto: "El reparto a las cabañas llegó caliente." },
+            { id: 2, nombre: "Vulcanización y Asistencia Central 24/7 Artificial", categoria: "servicios", subcat: "Vulcanizaciones 24/7", rating: "⭐⭐⭐⭐⭐", opinionesCount: 64, precio: 2, direccion: "Ruta N-48, Km 2.1 (Ingreso a Quillón)", telefono: "+56955556666", abierto: true, premium: true, emergencia: true, tags: ["Atención Domingo", "Servicio en Ruta"], infoAdicional: "Atención Inmediata 24 Horas", reviewTexto: "Me salvaron un domingo en la madrugada." },
+            { id: 4, nombre: "Viña Ancestral Los Valles Ocultos Artificial", categoria: "turismo", subcat: "Viñas abiertas hoy", rating: "⭐⭐⭐⭐", opinionesCount: 37, precio: 3, direccion: "Camino Cerro Negro, Km 4.5", telefono: "+56977778888", abierto: false, premium: true, emergencia: false, tags: ["Catas Guiadas", "Turismo Invierno"], infoAdicional: "Tour con Enólogo: $15.000 CLP", reviewTexto: "Muy buena la cata de vinos." },
+            { id: 5, nombre: "Panadería y Pastelería Delicias del Pueblo Artificial", categoria: "gastronomia", subcat: "Pastelerías", rating: "⭐⭐⭐⭐", opinionesCount: 4, precio: 1, direccion: "Vicente Méndez #140", telefono: "", abierto: true, premium: false, emergencia: false, tags: ["Local Físico"], infoAdicional: "", reviewTexto: "Buen pan tradicional de la zona." }
         ];
 
-        let appState = { cat: 'todos', search: '' };
+        let appState = { cat: 'todos', search: '', precio: 'todos', abiertoOnly: false };
 
         function filterAndRender() {
             const container = document.getElementById('main-directory-render');
@@ -36,23 +87,27 @@
                 const mSearch = item.nombre.toLowerCase().includes(appState.search.toLowerCase()) || 
                                 item.tags.some(t => t.toLowerCase().includes(appState.search.toLowerCase())) || 
                                 item.subcat.toLowerCase().includes(appState.search.toLowerCase());
-                return mCat && mSearch;
+                const mPrice = appState.precio === 'todos' || item.precio === parseInt(appState.precio);
+                const mOpen = !appState.abiertoOnly || item.abierto;
+                return mCat && mSearch && mPrice && mOpen;
             });
 
             filtered.sort((a, b) => (b.emergencia - a.emergencia) || (b.premium - a.premium));
 
-            document.getElementById('global-counter').innerText = `${filtered.length} locales listados`;
+            const counterEl = document.getElementById('global-counter');
+            if(counterEl) counterEl.innerText = `${filtered.length} locales listados`;
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center py-16 bg-white border border-[#E7E7E7] rounded-xl"><p class="text-[#6E7072] font-bold">Sin resultados en Quillón.</p></div>`;
+                container.innerHTML = `<div class="text-center py-16 bg-white border border-[#E7E7E7] rounded-xl fade-in"><p class="text-[#6E7072] font-bold">Sin resultados en Quillón.</p></div>`;
                 return;
             }
 
             filtered.forEach(item => {
+                const priceIndicator = "$".repeat(item.precio);
                 let html = '';
                 if (item.emergencia) {
                     html = `
-                        <div class="bg-red-50 border-2 border-[#DA1A29] rounded-xl p-5 mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <div class="bg-red-50 border-2 border-[#DA1A29] rounded-xl p-5 mb-4 flex flex-col sm:flex-row justify-between items-center gap-4 fade-in">
                             <div>
                                 <span class="bg-[#DA1A29] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-sm">⚠️ TURNO 24/7</span>
                                 <h3 class="text-base font-black text-[#111212] mt-0.5 tracking-tight">${item.nombre}</h3>
@@ -63,64 +118,3 @@
                         </div>`;
                 } else if (item.premium) {
                     html = `
-                        <div class="bg-white border border-[#E7E7E7] rounded-xl p-5 mb-4 shadow-sm relative">
-                            <div class="absolute top-0 right-0 bg-amber-500 text-white text-[9px] font-black px-2 py-0.5 rounded-bl-lg tracking-wider">👑 PREMIUM</div>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <div class="w-full sm:w-32 h-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded border flex items-center justify-center text-gray-400 text-xs font-bold shrink-0">🏠 COMERCIO</div>
-                                <div class="flex-1">
-                                    <span class="text-[10px] text-gray-400 font-extrabold uppercase block tracking-tight">${item.subcat}</span>
-                                    <h3 class="text-base font-bold text-[#111212] mt-0.5 leading-tight hover:text-[#0073BB] cursor-pointer">${item.nombre}</h3>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <div class="flex text-xs">${item.rating}</div>
-                                        <span class="text-xs text-[#6E7072] font-semibold">(${item.opinionesCount} opiniones) • ${item.precio}</span>
-                                        <span class="text-[10px] font-bold px-1.5 py-0.2 bg-green-50 text-green-700 rounded">${item.abierto ? 'Abierto' : 'Cerrado'}</span>
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-1.5 font-medium">📍 ${item.direccion}</p>
-                                    <div class="mt-2 bg-gray-50 border border-gray-100 p-2 rounded-md text-xs text-gray-600 font-medium">
-                                        <strong>Última opinión:</strong> "${item.reviewTexto}"
-                                    </div>
-                                    <div class="mt-4 pt-2.5 border-t border-gray-100 flex justify-between items-center">
-                                        <div class="flex gap-2 text-xs font-bold text-green-600">💬 WhatsApp Activo</div>
-                                        <div class="flex gap-1.5">
-                                            <a href="tel:${item.telefono}" class="bg-[#DA1A29] text-white text-xs font-bold px-3 py-1.5 rounded-md shadow-sm no-underline">Contactar</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                } else {
-                    html = `
-                        <div class="bg-white border border-[#E7E7E7] rounded-xl p-4 mb-2 opacity-80 shadow-sm">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="text-[9px] text-gray-400 font-bold uppercase block">${item.subcat}</span>
-                                    <h4 class="text-sm font-bold text-gray-700 mt-0.5">${item.nombre}</h4>
-                                    <p class="text-xs text-gray-400 mt-1 font-medium">📍 ${item.direccion}</p>
-                                </div>
-                                <span class="text-[8px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">Ficha Básica</span>
-                            </div>
-                        </div>`;
-                }
-                container.innerHTML += html;
-            });
-        }
-
-        function setPrimaryCategory(c, el) {
-            appState.cat = c;
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('border-[#DA1A29]', 'text-[#DA1A29]', 'font-bold');
-                b.classList.add('border-transparent', 'text-gray-500');
-            });
-            el.classList.remove('border-transparent', 'text-gray-500');
-            el.classList.add('border-[#DA1A29]', 'text-[#DA1A29]', 'font-bold');
-            filterAndRender();
-        }
-
-        function handleSearchInput(v) { appState.search = v; filterAndRender(); }
-        window.onload = () => { filterAndRender(); };
-    </script>
-
-    <!-- INTERFAZ VISUAL (DOM) -->
-    <header class="bg-white border-b border-[#E7E7E7] sticky top-0 z-50 px-4 py-3.5 shadow-sm">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2.5 shrink-0 select-none">
