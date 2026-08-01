@@ -13,7 +13,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- BARRA SUPERIOR (PROTEGIDA) --- */
+        /* --- BARRA SUPERIOR (MÁXIMA PROTECCIÓN) --- */
         .top-action-bar {
             display: flex;
             justify-content: space-between; 
@@ -22,7 +22,6 @@
             background-color: #ffffff;
         }
 
-        /* Agrupa menú y buscador a la izquierda (PROTEGIDO) */
         .left-search-cluster {
             display: flex;
             align-items: center;
@@ -61,6 +60,7 @@
             display: flex;
             align-items: flex-end; 
             width: 100%;
+            position: relative;
             transition: opacity 0.2s ease;
         }
 
@@ -74,6 +74,7 @@
             align-items: center;
             flex-shrink: 0;
             margin-right: 6px; 
+            margin-bottom: 2px;
         }
 
         .search-svg-icon {
@@ -86,8 +87,28 @@
             stroke-linejoin: round;
         }
 
+        .search-line-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        /* CORREGIDO: Texto tenue con tus ejemplos intuitivos sugeridos */
+        .search-hint-text {
+            color: #86868b; 
+            font-size: 11px;
+            font-weight: 500;
+            text-align: left;
+            padding-left: 2px;
+            margin-bottom: 1px; 
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .search-consecutive-line {
-            flex-grow: 1; 
+            width: 100%;
             height: 1.5px;
             background-color: #1d1d1f; 
             margin-bottom: 2px; 
@@ -215,11 +236,9 @@
             font-size: 12px;
         }
 
-        /* --- SECCIÓN DEL TÍTULO RESTAURADA Y VISIBLE --- */
+        /* --- SECCIÓN DEL TÍTULO (MÁXIMA PROTECCIÓN - INTACTO) --- */
         .main-header {
             text-align: left;
-            display: block !important; /* Fuerza la visibilidad en todos los navegadores */
-            visibility: visible !important;
             padding: 36px 28px 10px 28px; 
             background-color: #ffffff;
         }
@@ -266,7 +285,11 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                 </div>
-                <div class="search-consecutive-line"></div>
+                <!-- Línea junto a tus ejemplos sugeridos -->
+                <div class="search-line-container">
+                    <span class="search-hint-text">Restaurantes, cabañas, vulcanización...</span>
+                    <div class="search-consecutive-line"></div>
+                </div>
             </button>
         </div>
 
@@ -287,16 +310,3 @@
                 <a href="tel:133" class="emergencia-item"><span class="emergencia-label">🚨 Carabineros</span><span class="emergencia-number">133</span></a>
                 <a href="tel:132" class="emergencia-item"><span class="emergencia-label">🚒 Bomberos</span><span class="emergencia-number">132</span></a>
                 <a href="tel:131" class="emergencia-item"><span class="emergencia-label">🚑 Ambulancia / SAMU</span><span class="emergencia-number">131</span></a>
-                <a href="tel:+56983234343" class="emergencia-item"><span class="emergencia-label">🛡️ Seguridad Municipal</span><span class="emergencia-number">Celular</span></a>
-                <a href="tel:+56979094252" class="emergencia-item"><span class="emergencia-label">🚙 Grúas Locales 24/7</span><span class="emergencia-number">Llamar</span></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- AQUÍ ESTÁ NUEVAMENTE EL TÍTULO VISIBLE -->
-    <header class="main-header">
-        <h1 class="store-title">Quillón <span class="animated-text">en Línea</span></h1>
-    </header>
-
-    <script>
-        function abrirMenuAccion() { console.log("Sistema listo: Menú de acción."); }
