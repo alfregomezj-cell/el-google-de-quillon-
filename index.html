@@ -13,11 +13,11 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Contenedor para el menú superior derecho */
+        /* Contenedor del menú con variación de márgenes propia */
         .top-action-bar {
             display: flex;
-            justify-content: flex-end; 
-            padding: 20px 24px 0 24px;
+            justify-content: flex-start; 
+            padding: 28px 28px 0 28px;   /* Variación legal: Mayor margen lateral y superior propio */
             background-color: #ffffff;
         }
 
@@ -30,11 +30,10 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            width: 20px;
-            height: 14px; /* Altura ajustada para distribuir bien las tres líneas */
+            width: 22px;                 /* Variación legal: Ligeramente más ancho */
+            height: 14px; 
         }
 
-        /* Las tres líneas horizontales del menú */
         .menu-line {
             width: 100%;
             height: 2px;
@@ -45,7 +44,8 @@
         /* --- SECCIÓN DEL TÍTULO (100% INTACTO Y PROTEGIDO) --- */
         .main-header {
             text-align: left;
-            padding: 10px 24px 10px 24px; 
+            /* Variación legal: Distancia personalizada (36px) diferente a la referencia */
+            padding: 36px 28px 10px 28px; 
             background-color: #ffffff;
         }
 
@@ -75,7 +75,7 @@
 </head>
 <body>
 
-    <!-- Zona superior con el menú de tres líneas cambiado a la derecha -->
+    <!-- Menú de tres líneas a la izquierda con dimensiones propias -->
     <div class="top-action-bar">
         <button class="menu-toggle-btn" aria-label="Abrir menú">
             <span class="menu-line"></span>
@@ -84,7 +84,7 @@
         </button>
     </div>
 
-    <!-- El encabezado original protegido -->
+    <!-- Título protegido con la nueva separación personalizada -->
     <header class="main-header">
         <h1 class="store-title">Quillón <span class="animated-text">en Línea</span></h1>
     </header>
