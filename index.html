@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quillón en línea</title>
+    <title>Quillón en Línea</title>
     <style>
         html, body {
             margin: 0;
@@ -226,7 +226,7 @@
             white-space: nowrap;
         }
 
-        /* --- ENCABEZADO CORREGIDO CON TU TEXTO (quillón en línea) --- */
+        /* --- ENCABEZADO RECUPERADO AL 100% (PROTEGIDO) --- */
         .main-header {
             text-align: left;
             padding: 20px 16px 10px 16px; 
@@ -240,11 +240,14 @@
         .store-title {
             font-size: 36px; 
             font-weight: 700;
+            color: #1d1d1f; /* "Quillón" permanece siempre negro fijo */
             letter-spacing: -0.5px;
             margin: 0;
+        }
+
+        /* Animación recuperada de 0.44s con barrido lineal a rojo */
+        .animated-text {
             display: inline-block;
-            
-            /* Animación lineal de 0.44s aplicada a todo el texto de izquierda a derecha */
             background: linear-gradient(to right, #1d1d1f 50%, #e31c1c 50%);
             background-size: 200% 100%;
             background-position: 0% 0%;
@@ -311,6 +314,3 @@
 
                 <a href="tel:4222842140" class="emergencia-item">
                     <span>🧑‍🚒 Cuarta Compañía</span>
-                    <span class="emergencia-number">(42) 284 2140</span>
-                </a>
-
