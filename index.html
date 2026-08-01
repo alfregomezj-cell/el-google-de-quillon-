@@ -18,9 +18,9 @@
             display: flex;
             justify-content: flex-start; 
             align-items: center;
-            padding: 24px 28px 16px 28px; /* Espacio interno calibrado */
+            padding: 24px 28px 10px 28px;
             background-color: #ffffff;
-            gap: 24px; /* Espacio directo entre el menú y la lupa pegada */
+            gap: 20px; /* Espacio controlado entre el menú y el bloque del buscador */
         }
 
         /* Botón de menú de tres líneas (INTACTO Y PROTEGIDO) */
@@ -34,6 +34,7 @@
             justify-content: space-between;
             width: 22px;
             height: 14px;
+            flex-shrink: 0;
         }
 
         .menu-line {
@@ -43,16 +44,31 @@
             border-radius: 1px;
         }
 
-        /* Botón de la lupa sutil pegado a la izquierda */
-        .global-search-trigger {
+        /* UNIFICADO: El bloque del buscador es una sola pieza interactiva (Lupa + Línea) */
+        .search-brand-group {
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0;
+            padding: 0 0 6px 0; /* Espacio inferior para la línea base */
             display: flex;
             align-items: center;
-            justify-content: center;
+            width: 100%;
+            max-width: 240px; /* Se extiende por el centro y deja libre el lado derecho */
+            /* La línea base es parte del diseño unificado de la lupa */
+            border-bottom: 1.5px solid #1d1d1f; 
+            transition: opacity 0.2s ease;
+        }
+
+        .search-brand-group:hover {
+            opacity: 0.7;
+        }
+
+        /* Icono de la lupa dentro del bloque */
+        .search-block-icon {
             color: #1d1d1f;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
         }
 
         .search-svg-icon {
@@ -65,17 +81,10 @@
             stroke-linejoin: round;
         }
 
-        /* NUEVO: Línea divisoria horizontal larga que cruza toda la pantalla */
-        .horizontal-divider-line {
-            width: 100%;
-            height: 1px;
-            background-color: #e8e8ed; /* Gris claro muy limpio y sutil */
-        }
-
         /* --- SECCIÓN DEL TÍTULO (100% INTACTO Y PROTEGIDO) --- */
         .main-header {
             text-align: left;
-            padding: 32px 28px 10px 28px; /* Ajustado el margen superior con la línea */
+            padding: 36px 28px 10px 28px; 
             background-color: #ffffff;
         }
 
@@ -105,28 +114,27 @@
 </head>
 <body>
 
-    <!-- 1. Fila de navegación superior (Menú y Lupa pegados) -->
+    <!-- Fila superior estructurada en piezas protegidas -->
     <div class="top-action-bar">
-        <!-- Menú de tres líneas -->
+        <!-- Menú de tres líneas protegido -->
         <button class="menu-toggle-btn" aria-label="Abrir menú">
             <span class="menu-line"></span>
             <span class="menu-line"></span>
             <span class="menu-line"></span>
         </button>
 
-        <!-- Lupa de búsqueda pegada al lado -->
-        <button class="global-search-trigger" id="global-search-btn" aria-label="Buscar en la comuna">
-            <svg class="search-svg-icon" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+        <!-- Bloque del Buscador Global: La lupa y la línea forman una única unidad técnica -->
+        <button class="search-brand-group" id="global-search-trigger" aria-label="Activar búsqueda global">
+            <div class="search-block-icon">
+                <svg class="search-svg-icon" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
         </button>
     </div>
 
-    <!-- 2. Línea divisoria horizontal completa de tu trazo naranja -->
-    <div class="horizontal-divider-line"></div>
-
-    <!-- 3. El encabezado original protegido -->
+    <!-- El encabezado original protegido -->
     <header class="main-header">
         <h1 class="store-title">Quillón <span class="animated-text">en Línea</span></h1>
     </header>
