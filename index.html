@@ -35,8 +35,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             
-            /* Cambiado de 2.5s a 1.2s para un barrido más rápido */
-            animation: colorWipe 1.2s ease-in-out forwards;
+            /* 'linear' asegura que el avance sea parejo, '0.8s' aumenta la velocidad */
+            animation: colorWipe 0.8s linear forwards;
         }
 
         @keyframes colorWipe {
