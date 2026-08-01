@@ -226,7 +226,7 @@
             white-space: nowrap;
         }
 
-        /* --- ENCABEZADO MEJORADO TOTALMENTE EXPUESTO --- */
+        /* --- CONTENEDOR DEL TÍTULO SOLIDO (VISIBILIDAD GARANTIZADA) --- */
         .title-container {
             width: 100%;
             padding: 20px 16px;
@@ -237,25 +237,15 @@
         .store-title {
             font-size: 36px; 
             font-weight: 700;
-            color: #1d1d1f; /* Quillón en negro fijo */
+            color: #1d1d1f; /* "Quillón" fijo en negro */
             letter-spacing: -0.5px;
             margin: 0;
         }
 
-        /* Animación lineal de 0.44s aplicada estrictamente a "en Línea" */
-        .animated-text {
+        /* Color rojo directo para asegurar que el navegador móvil lo pinte de inmediato */
+        .red-text-fallback {
+            color: #e31c1c; 
             display: inline-block;
-            background: linear-gradient(to right, #1d1d1f 50%, #e31c1c 50%);
-            background-size: 200% 100%;
-            background-position: 0% 0%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: colorWipe 0.44s linear 0.1s forwards;
-        }
-
-        @keyframes colorWipe {
-            0% { background-position: 0% 0%; }
-            100% { background-position: -100% 0%; }
         }
     </style>
 </head>
@@ -315,3 +305,16 @@
                 </a>
 
                 <div class="emergencia-item">
+                    <span>🚙 Grúas de Rescate</span>
+                    <span class="emergencia-placeholder">Próximamente</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Título con visualización garantizada nativa -->
+    <div class="title-container">
+        <h1 class="store-title">Quillón <span class="red-text-fallback">en Línea</span></h1>
+    </div>
+
+    <script>
