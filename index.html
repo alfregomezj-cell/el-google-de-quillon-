@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quillón en Línea</title>
+    <title>quillón en línea</title>
     <style>
         html, body {
             margin: 0;
@@ -226,7 +226,7 @@
             white-space: nowrap;
         }
 
-        /* --- ENCABEZADO FIJO TOTALMENTE VISIBLE EN PANTALLA --- */
+        /* --- ENCABEZADO CORREGIDO CON TU TEXTO (quillón en línea) --- */
         .main-header {
             text-align: left;
             padding: 20px 16px 10px 16px; 
@@ -240,13 +240,11 @@
         .store-title {
             font-size: 36px; 
             font-weight: 700;
-            color: #1d1d1f;
             letter-spacing: -0.5px;
             margin: 0;
-        }
-
-        .animated-text {
             display: inline-block;
+            
+            /* Animación lineal de 0.44s aplicada a todo el texto de izquierda a derecha */
             background: linear-gradient(to right, #1d1d1f 50%, #e31c1c 50%);
             background-size: 200% 100%;
             background-position: 0% 0%;
@@ -286,7 +284,6 @@
             </button>
         </div>
 
-        <!-- Botón de Emergencia con onclick seguro -->
         <div class="emergencia-container">
             <button class="emergencia-btn" onclick="toggleEmergenciaMenu(event)">
                 <span class="emergency-top-text">Emergencia</span>
