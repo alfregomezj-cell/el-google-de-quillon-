@@ -13,9 +13,39 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Contenedor para el menú superior derecho */
+        .top-action-bar {
+            display: flex;
+            justify-content: flex-end; 
+            padding: 20px 24px 0 24px;
+            background-color: #ffffff;
+        }
+
+        /* Botón de menú de tres líneas */
+        .menu-toggle-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 20px;
+            height: 14px; /* Altura ajustada para distribuir bien las tres líneas */
+        }
+
+        /* Las tres líneas horizontales del menú */
+        .menu-line {
+            width: 100%;
+            height: 2px;
+            background-color: #1d1d1f; 
+            border-radius: 1px;
+        }
+
+        /* --- SECCIÓN DEL TÍTULO (100% INTACTO Y PROTEGIDO) --- */
         .main-header {
             text-align: left;
-            padding: 40px 24px 10px 24px;
+            padding: 10px 24px 10px 24px; 
             background-color: #ffffff;
         }
 
@@ -34,23 +64,27 @@
             background-position: 0% 0%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
-            /* 0.44s: El balance exacto que no habíamos probado */
             animation: colorWipe 0.44s linear 0.1s forwards;
         }
 
         @keyframes colorWipe {
-            0% {
-                background-position: 0% 0%;
-            }
-            100% {
-                background-position: -100% 0%;
-            }
+            0% { background-position: 0% 0%; }
+            100% { background-position: -100% 0%; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Zona superior con el menú de tres líneas cambiado a la derecha -->
+    <div class="top-action-bar">
+        <button class="menu-toggle-btn" aria-label="Abrir menú">
+            <span class="menu-line"></span>
+            <span class="menu-line"></span>
+            <span class="menu-line"></span>
+        </button>
+    </div>
+
+    <!-- El encabezado original protegido -->
     <header class="main-header">
         <h1 class="store-title">Quillón <span class="animated-text">en Línea</span></h1>
     </header>
