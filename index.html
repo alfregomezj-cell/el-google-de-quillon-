@@ -226,7 +226,7 @@
             white-space: nowrap;
         }
 
-        /* --- CONTENEDOR DEL TÍTULO SOLIDO (VISIBILIDAD GARANTIZADA) --- */
+        /* --- CONTENEDOR DEL TÍTULO (PROTEGIDO) --- */
         .title-container {
             width: 100%;
             padding: 20px 16px;
@@ -242,10 +242,32 @@
             margin: 0;
         }
 
-        /* Color rojo directo para asegurar que el navegador móvil lo pinte de inmediato */
-        .red-text-fallback {
+        /* NUEVA ANIMACIÓN ULTRAESTABLE POR MÁSCARA: Barrido gradual a rojo en 0.44s de izquierda a derecha */
+        .animated-red-text {
             color: #e31c1c; 
             display: inline-block;
+            
+            /* Usamos una máscara de degradado lineal nativa muy ligera */
+            -webkit-mask-image: linear-gradient(to right, #000 50%, rgba(0,0,0,0.2) 50%);
+            mask-image: linear-gradient(to right, #000 50%, rgba(0,0,0,0.2) 50%);
+            -webkit-mask-size: 200% 100%;
+            mask-size: 200% 100%;
+            -webkit-mask-position: 0% 0%;
+            mask-position: 0% 0%;
+            
+            /* Animación lineal fluida e idéntica a la aprobada */
+            animation: safeColorWipe 0.44s linear 0.1s forwards;
+        }
+
+        @keyframes safeColorWipe {
+            0% {
+                -webkit-mask-position: 0% 0%;
+                mask-position: 0% 0%;
+            }
+            100% {
+                -webkit-mask-position: -100% 0%;
+                mask-position: -100% 0%;
+            }
         }
     </style>
 </head>
@@ -294,27 +316,3 @@
                     <span class="emergencia-number">(42) 284 2140</span>
                 </a>
                 
-                <a href="tel:4222842140" class="emergencia-item">
-                    <span>🚒 Bomberos Quillón</span>
-                    <span class="emergencia-number">(42) 284 2140</span>
-                </a>
-
-                <a href="tel:4222842140" class="emergencia-item">
-                    <span>🧑‍🚒 Cuarta Compañía</span>
-                    <span class="emergencia-number">(42) 284 2140</span>
-                </a>
-
-                <div class="emergencia-item">
-                    <span>🚙 Grúas de Rescate</span>
-                    <span class="emergencia-placeholder">Próximamente</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Título con visualización garantizada nativa -->
-    <div class="title-container">
-        <h1 class="store-title">Quillón <span class="red-text-fallback">en Línea</span></h1>
-    </div>
-
-    <script>
