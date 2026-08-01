@@ -226,26 +226,23 @@
             white-space: nowrap;
         }
 
-        /* --- ENCABEZADO RECUPERADO AL 100% (PROTEGIDO) --- */
-        .main-header {
-            text-align: left;
-            padding: 20px 16px 10px 16px; 
-            background-color: #ffffff;
-            box-sizing: border-box;
+        /* --- ENCABEZADO MEJORADO TOTALMENTE EXPUESTO --- */
+        .title-container {
             width: 100%;
-            position: relative;
-            z-index: 1; 
+            padding: 20px 16px;
+            box-sizing: border-box;
+            background-color: #ffffff;
         }
 
         .store-title {
             font-size: 36px; 
             font-weight: 700;
-            color: #1d1d1f; /* "Quillón" permanece siempre negro fijo */
+            color: #1d1d1f; /* Quillón en negro fijo */
             letter-spacing: -0.5px;
             margin: 0;
         }
 
-        /* Animación recuperada de 0.44s con barrido lineal a rojo */
+        /* Animación lineal de 0.44s aplicada estrictamente a "en Línea" */
         .animated-text {
             display: inline-block;
             background: linear-gradient(to right, #1d1d1f 50%, #e31c1c 50%);
@@ -314,3 +311,7 @@
 
                 <a href="tel:4222842140" class="emergencia-item">
                     <span>🧑‍🚒 Cuarta Compañía</span>
+                    <span class="emergencia-number">(42) 284 2140</span>
+                </a>
+
+                <div class="emergencia-item">
