@@ -44,16 +44,16 @@
             border-radius: 1px;
         }
 
-        /* UNIFICADO: El bloque del buscador (Lupa + Línea consecutiva) */
+        /* UNIFICADO: El bloque del buscador (Lupa + Línea consecutiva a nivel del mango) */
         .search-brand-group {
             background: none;
             border: none;
             cursor: pointer;
             padding: 0;
             display: flex;
-            align-items: center;
+            align-items: flex-end; /* Alinea los elementos hacia la base inferior */
             width: 100%;
-            max-width: 240px; /* Mantiene el largo final aprobado */
+            max-width: 240px; 
             transition: opacity 0.2s ease;
         }
 
@@ -61,13 +61,13 @@
             opacity: 0.7;
         }
 
-        /* Icono de la lupa (Ahora libre de subrayado) */
+        /* Icono de la lupa (INTACTO) */
         .search-block-icon {
             color: #1d1d1f;
             display: flex;
             align-items: center;
             flex-shrink: 0;
-            margin-right: 8px; /* Espacio antes de que empiece la línea */
+            margin-right: 6px; 
         }
 
         .search-svg-icon {
@@ -80,13 +80,13 @@
             stroke-linejoin: round;
         }
 
-        /* NUEVO: La línea comienza estrictamente al terminar la lupa */
+        /* CORREGIDO: La línea comienza justo a la altura del mango (más abajo) */
         .search-consecutive-line {
-            flex-grow: 1; /* Se estira para cubrir todo el largo restante del bloque */
+            flex-grow: 1; 
             height: 1.5px;
-            background-color: #1d1d1f; /* Color negro sutil coincidente */
-            align-self: center;
-            margin-top: 4px; /* Pequeño ajuste para centrarla horizontalmente con el ojo de la lupa */
+            background-color: #1d1d1f; 
+            /* Se desplaza sutilmente hacia abajo para calzar perfecto con el palito */
+            margin-bottom: 2px; 
         }
 
         /* --- SECCIÓN DEL TÍTULO (100% INTACTO Y PROTEGIDO) --- */
@@ -130,7 +130,7 @@
             <span class="menu-line"></span>
         </button>
 
-        <!-- Bloque del Buscador Global Corregido: La línea inicia justo al terminar la lupa -->
+        <!-- Bloque del Buscador Global: Línea perfectamente nivelada con la base del mango -->
         <button class="search-brand-group" id="global-search-trigger" aria-label="Activar búsqueda global">
             <div class="search-block-icon">
                 <svg class="search-svg-icon" viewBox="0 0 24 24">
@@ -138,7 +138,6 @@
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
             </div>
-            <!-- Elemento de línea consecutiva -->
             <div class="search-consecutive-line"></div>
         </button>
     </div>
