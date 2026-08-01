@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quillón en Línea</title>
     <style>
-        /* Estilos base para dejar la página limpia y blanca */
         body {
             margin: 0;
             padding: 0;
@@ -14,28 +13,54 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Contenedor del encabezado principal */
         .main-header {
             text-align: left;
             padding: 40px 24px 10px 24px;
             background-color: #ffffff;
         }
 
-        /* Título con estilo minimalista */
+        /* Estilo base del título principal */
         .store-title {
             font-size: 40px;
             font-weight: 700;
-            color: #1d1d1f;
+            color: #1d1d1f; /* Color negro fijo para la palabra Quillón */
             letter-spacing: -0.5px;
             margin: 0;
+        }
+
+        /* Efecto de barrido aplicado exclusivamente a "en Línea" */
+        .animated-text {
+            display: inline-block;
+            
+            /* Degradado de Negro (#1d1d1f) a Rojo (#e31c1c) */
+            background: linear-gradient(to right, #1d1d1f 50%, #e31c1c 50%);
+            background-size: 200% 100%;
+            background-position: 0% 0%;
+            
+            /* Aplica el fondo directamente sobre el contorno de las letras */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Animación de barrido hacia la derecha al cargar la página */
+            animation: colorWipe 2.5s ease-in-out forwards;
+        }
+
+        /* Movimiento lineal progresivo de izquierda a derecha */
+        @keyframes colorWipe {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: -100% 0%;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado con tu título -->
     <header class="main-header">
-        <h1 class="store-title">Quillón en Línea</h1>
+        <!-- Separamos el texto para animar solo la segunda sección -->
+        <h1 class="store-title">Quillón <span class="animated-text">en Línea</span></h1>
     </header>
 
 </body>
