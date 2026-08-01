@@ -13,17 +13,22 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Contenedor superior distribuido para el menú y el buscador global */
+        /* Contenedor flexible con posición relativa para asegurar el centro absoluto */
         .top-action-bar {
+            position: relative;
             display: flex;
-            justify-content: space-between; 
             align-items: center;
+            height: 40px;
             padding: 28px 28px 0 28px;
             background-color: #ffffff;
-            gap: 20px;
         }
 
-        /* Botón de menú de tres líneas (INTACTO Y PROTEGIDO) */
+        /* Lado Izquierdo: Menú de tres líneas fijo en su posición (INTACTO) */
+        .left-menu-container {
+            position: absolute;
+            left: 28px;
+        }
+
         .menu-toggle-btn {
             background: none;
             border: none;
@@ -34,7 +39,6 @@
             justify-content: space-between;
             width: 22px;
             height: 14px;
-            flex-shrink: 0; 
         }
 
         .menu-line {
@@ -44,34 +48,43 @@
             border-radius: 1px;
         }
 
-        /* Buscador Global Potente integrado en la línea naranja */
-        .top-search-wrapper {
+        /* CENTRO ABSOLUTO: El bloque se posiciona exactamente en la mitad matemática de la pantalla */
+        .center-search-group {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* Empuja el eje al centro exacto */
             display: flex;
             align-items: center;
-            background-color: #f5f5f7; 
-            border-radius: 8px;
-            padding: 6px 12px;
-            width: 100%;
-            max-width: 220px; 
+            gap: 12px;
         }
 
-        .top-search-icon {
-            font-size: 14px;
-            color: #86868b;
-            margin-right: 8px;
-        }
-
-        .top-search-input {
+        /* Botón de la lupa sutil (INTACTO) */
+        .global-search-trigger {
+            background: none;
             border: none;
-            background: transparent;
-            font-size: 13px;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #1d1d1f;
-            outline: none;
-            width: 100%;
         }
 
-        .top-search-input::placeholder {
-            color: #86868b;
+        .search-svg-icon {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Línea sutil al lado de la lupa */
+        .search-divider-line {
+            width: 1px;
+            height: 16px;
+            background-color: #d2d2d7; 
         }
 
         /* --- SECCIÓN DEL TÍTULO (100% INTACTO Y PROTEGIDO) --- */
@@ -107,18 +120,25 @@
 </head>
 <body>
 
-    <!-- Zona superior con el menú y el Buscador Global en la línea naranja -->
     <div class="top-action-bar">
-        <button class="menu-toggle-btn" aria-label="Abrir menú">
-            <span class="menu-line"></span>
-            <span class="menu-line"></span>
-            <span class="menu-line"></span>
-        </button>
+        <!-- Izquierda: Menú de tres líneas fijo en su esquina original -->
+        <div class="left-menu-container">
+            <button class="menu-toggle-btn" aria-label="Abrir menú">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
 
-        <!-- Buscador preparado para filtrar cabañas, restaurantes, servicios y emergencias -->
-        <div class="top-search-wrapper">
-            <span class="top-search-icon">🔍</span>
-            <input type="text" id="global-search-input" class="top-search-input" placeholder="Buscar cabañas, servicios...">
+        <!-- Centro Absoluto: Lupa y línea alineadas perfectamente en el medio -->
+        <div class="center-search-group">
+            <button class="global-search-trigger" id="global-search-btn" aria-label="Buscar en la comuna">
+                <svg class="search-svg-icon" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
+            <div class="search-divider-line"></div>
         </div>
     </div>
 
