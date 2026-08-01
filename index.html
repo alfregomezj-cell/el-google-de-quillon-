@@ -93,7 +93,7 @@
             margin-bottom: 2px; 
         }
 
-        /* --- BOTÓN DE EMERGENCIA CON APILAMIENTO VERTICAL --- */
+        /* --- BOTÓN DE EMERGENCIA (INTACTO) --- */
         .emergencia-container {
             position: relative;
             display: inline-block;
@@ -105,9 +105,9 @@
             padding: 4px 0;
             cursor: pointer;
             display: flex;
-            flex-direction: column; /* Apila los elementos verticalmente */
-            align-items: center;    /* Centra la palabra sobre el 24/7 */
-            gap: 2px;               /* Espacio sutil entre textos */
+            flex-direction: column; 
+            align-items: center;    
+            gap: 2px;               
             transition: opacity 0.2s ease;
         }
 
@@ -115,17 +115,15 @@
             opacity: 0.6;
         }
 
-        /* CORREGIDO: Palabra emergencia arriba en letras chicas dentro del largo */
         .emergency-top-text {
             color: #e31c1c;
-            font-size: 8px; /* Letras adecuadamente más chicas */
+            font-size: 8px; 
             font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             line-height: 1;
         }
 
-        /* Contenedor inferior para mantener el ícono y el 24/7 tal cual estaban */
         .emergency-bottom-row {
             display: flex;
             align-items: center;
@@ -217,9 +215,11 @@
             font-size: 12px;
         }
 
-        /* --- SECCIÓN DEL TÍTULO (PROTEGIDO) --- */
+        /* --- SECCIÓN DEL TÍTULO RESTAURADA Y VISIBLE --- */
         .main-header {
             text-align: left;
+            display: block !important; /* Fuerza la visibilidad en todos los navegadores */
+            visibility: visible !important;
             padding: 36px 28px 10px 28px; 
             background-color: #ffffff;
         }
@@ -270,7 +270,7 @@
             </button>
         </div>
 
-        <!-- Bloque Derecho: Estructura vertical con la palabra arriba -->
+        <!-- Bloque Derecho: Emergencia -->
         <div class="emergencia-container">
             <button class="emergencia-btn">
                 <span class="emergency-top-text">Emergencia</span>
@@ -282,7 +282,6 @@
                 </div>
             </button>
 
-            <!-- Panel de números locales protegido -->
             <div class="emergencia-dropdown">
                 <div class="dropdown-header">Números Locales (Quillón)</div>
                 <a href="tel:133" class="emergencia-item"><span class="emergencia-label">🚨 Carabineros</span><span class="emergencia-number">133</span></a>
@@ -294,4 +293,10 @@
         </div>
     </div>
 
-    <!-- Título original protegido -->
+    <!-- AQUÍ ESTÁ NUEVAMENTE EL TÍTULO VISIBLE -->
+    <header class="main-header">
+        <h1 class="store-title">Quillón <span class="animated-text">en Línea</span></h1>
+    </header>
+
+    <script>
+        function abrirMenuAccion() { console.log("Sistema listo: Menú de acción."); }
