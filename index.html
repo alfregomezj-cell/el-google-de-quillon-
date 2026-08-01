@@ -35,8 +35,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             
-            /* 'linear' asegura que el avance sea parejo, '0.8s' aumenta la velocidad */
-            animation: colorWipe 0.8s linear forwards;
+            /* 0.35s de duración para máxima velocidad */
+            /* 0.1s de espera al inicio para asegurar que el usuario vea el golpe de color */
+            animation: colorWipe 0.35s linear 0.1s forwards;
         }
 
         @keyframes colorWipe {
